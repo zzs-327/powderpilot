@@ -1,0 +1,465 @@
+# ============================================================
+# 评估集（Golden Set）：把"检索效果还行"变成可复现的数字
+#
+# 用法：python -m scripts.evaluate
+#
+# 字段说明：
+#   id            用例编号
+#   kind          retrieval（应召回到证据）/ refusal（库里没有，应拒答）
+#   question      用户问题
+#   level/board   可选的过滤条件（模拟用户画像）
+#   expect_any    命中判定：任意一组子串全部出现在同一条 chunk 里，即算命中
+#                 （比写死 chunk_id 稳：改文案不会让用例全挂）
+# ============================================================
+
+# ---------------- 结构化统计类（应走 SQL，但检索也要能召回总览） ----------------
+# 注：2026-09 换真实数据后，期望值同步更新（原来是示例数据的 35 条 / 高级 15 条）。
+#     这正是评估集的作用：数据一改，写死旧值的用例立刻变红，提醒你"基线和数据必须同源"。
+- id: q01
+  kind: retrieval
+  question: 万龙有几条高级道
+  expect_any:
+    - ['高级道', '19']
+    - ['共 32 条雪道']
+
+- id: q02
+  kind: retrieval
+  question: 万龙一共有多少条雪道
+  expect_any:
+    - ['32 条雪道']
+    # 总览已经写明两个口径：来源总数 22 条雪道，分级合计 32 条。
+    # 两个数在同一条里才算答到这件事，不能只看出现了 32。
+    - ['22 条雪道', '分级统计合计 32']
+
+# ---------------- 专有名词（BM25 的主场） ----------------
+- id: q03
+  kind: retrieval
+  question: 金龙道难不难
+  expect_any:
+    - ['金龙道']
+
+- id: q04
+  kind: retrieval
+  question: 银龙道适合练什么
+  expect_any:
+    # 新的真实档案里，银龙道是中庸的一条（平均 12 度/最大 15 度）；
+    # 官方源没给"适合练什么"的经验描述，所以只断言能召回这条雪道本身
+    - ['银龙道', '中级']
+
+- id: q05
+  kind: retrieval
+  question: 长龙道有什么要注意的
+  expect_any:
+    - ['长龙道']
+
+# ---------------- 价格（带录入日期） ----------------
+# 注：期望值改为 2025-2026 雪季真实门市价（480/380 是旧的示例值）
+- id: q06
+  kind: retrieval
+  question: 万龙雪票多少钱
+  expect_any:
+    - ['雪票', '560']
+    - ['雪票', '650']
+
+- id: q07
+  kind: retrieval
+  question: 万龙租一套雪具多少钱
+  expect_any:
+    - ['雪具租赁', '200']
+    - ['雪具租赁', '300']
+
+- id: q08
+  kind: retrieval
+  question: 万龙的夜场雪票多少钱
+  expect_any:
+    - ['夜场', '268']
+
+# ---------------- 分层（带画像过滤） ----------------
+- id: q09
+  kind: retrieval
+  question: 第一次去万龙要注意什么
+  level: beginner
+  board: snowboard
+  expect_any:
+    - ['新手']
+    - ['租赁']
+
+- id: q10
+  kind: retrieval
+  question: 我这种水平去万龙能玩什么
+  level: advanced
+  expect_any:
+    - ['老手']
+    - ['卡宾']
+    - ['高级道']
+
+# ---------------- 教学视频（单双板硬过滤） ----------------
+- id: q11
+  kind: retrieval
+  question: 换刃怎么练
+  board: snowboard
+  expect_any:
+    - ['换刃', '单板']
+
+- id: q12
+  kind: retrieval
+  question: 双板平行式怎么入门
+  board: ski
+  expect_any:
+    - ['平行']
+
+# ---------------- 实拍证据（B 级来源） ----------------
+- id: q13
+  kind: retrieval
+  question: 金龙道山顶有实拍图吗
+  expect_any:
+    - ['实拍', '金龙道']
+
+# ---------------- 位置与交通 ----------------
+- id: q14
+  kind: retrieval
+  question: 万龙在哪个城市
+  expect_any:
+    - ['崇礼']
+
+- id: q15
+  kind: retrieval
+  question: 从郑州怎么去万龙
+  expect_any:
+    - ['郑州']
+
+# ---------------- 第二个雪场：多雪场隔离（新增，2026-09） ----------------
+# 为什么这几条重要：只有一个雪场时，"串场"根本不可能发生；
+# 加了第二个雪场，才第一次真正考验"会不会把 A 雪场的数据答成 B 雪场的"。
+- id: q16
+  kind: retrieval
+  question: 丝绸之路的玄奘大道难不难
+  expect_any:
+    - ['玄奘大道', '37']
+
+- id: q17
+  kind: retrieval
+  question: 丝绸之路初级道雪票多少钱
+  expect_any:
+    - ['初级道', '99']
+    - ['初级道', '159']
+
+- id: q18
+  kind: retrieval
+  question: 丝绸之路有哪些高速缆车
+  expect_any:
+    - ['缆车']
+
+# ---------------- 拒答（库里没有，必须返回空而不是硬答） ----------------
+- id: r01
+  kind: refusal
+  question: 二世谷雪票多少钱
+  # 这条用例曾经是红的，值得记住它教了什么：
+  #   守卫原来靠 "XX滑雪场" 后缀识别未收录雪场，本问句没带后缀 → 守卫不触发，
+  #   只能靠向量距离阈值兜底。只有一个雪场时兜得住，加入第二个雪场后
+  #   它会把丝绸之路的价格答给问二世谷的人。
+  #   修复：新增策展名单 data/uncovered_resorts.yaml（79 个名称/别名），
+  #   守卫先查名单、再用后缀正则兜底。名单里刻意只写具体雪场名、
+  #   不写地区名，否则"崇礼的雪场哪个适合新手"这类正常泛问会被误杀。
+
+- id: r02
+  kind: refusal
+  question: 南山滑雪场雪票多少钱
+  # 本节两条拒答用例已被自动体检（audit_refusal_cases）抓过两次：
+  # 原问太舞 → 太舞收录后失效；改问多乐美地 → 多乐美地也收录了 → 现在换成南山。
+  # 结论：**收录范围一动，拒答用例必须同步换**，靠人工记必然漏。
+
+- id: r03
+  kind: refusal
+  question: 怎么注册一家公司
+
+- id: r04
+  kind: refusal
+  question: 推荐一部滑雪电影
+
+# ============================================================
+# 2026-09-13 扩充：雪场从 2 座加到 5 座后补的题
+#
+# 为什么必须补：原评估集是"2 雪场时代"标定的，加入北大湖/将军山/松花湖后
+#   ① 新雪场完全没有覆盖；
+#   ② 没有"跨雪场隔离"题——而多雪场最容易出的错就是拿 A 的数据答 B；
+#   ③ 新增的"可信度说明/来源登记"元信息块会跟正文抢排名（q14 曾因此掉到第 5），
+#      需要能观察到这类噪声的影响。
+# ============================================================
+
+# ---------------- 北大湖（唯一整座官网直采的雪场，有 34 条雪道明细） ----------------
+- id: q19
+  kind: retrieval
+  question: 北大湖有什么雪道
+  expect_any:
+    - ['北大湖', '雪道「']
+
+- id: q20
+  kind: retrieval
+  question: 北大湖的凌云大道陡不陡
+  expect_any:
+    - ['凌云大道']
+
+- id: q21
+  kind: retrieval
+  question: 北大湖坐什么索道
+  expect_any:
+    - ['北大湖', '索道「']
+
+- id: q22
+  kind: retrieval
+  question: 北大湖的咨询电话是多少
+  expect_any:
+    - ['400-770-6789']
+
+# ---------------- 将军山 / 松花湖（没有逐条明细，只有总数与分歧记录） ----------------
+- id: q23
+  kind: retrieval
+  question: 将军山一共有多少条雪道
+  expect_any:
+    - ['将军山', '61']
+
+- id: q24
+  kind: retrieval
+  question: 将军山的最大落差是多少
+  expect_any:
+    - ['落差', '405']
+    - ['落差', '460']
+
+- id: q25
+  kind: retrieval
+  question: 松花湖有多少条雪道
+  expect_any:
+    - ['松花湖', '50 条']
+
+- id: q26
+  kind: retrieval
+  question: 松花湖的雪道总长多少公里
+  expect_any:
+    - ['松花湖', '55 公里']
+    - ['松花湖', '31 公里']
+
+# ---------------- 跨雪场隔离（多雪场最容易出的错：拿 A 的数据答 B） ----------------
+# 判定方式：期望命中的 chunk 必须带对雪场名——只要串场就不可能同时满足
+- id: q27
+  kind: retrieval
+  question: 北大湖的高级道有哪些
+  expect_any:
+    - ['北大湖', '高级道']
+
+- id: q28
+  kind: retrieval
+  question: 松花湖的雪道规模有多大
+  expect_any:
+    - ['松花湖', '雪道']
+
+# ---------------- 分层（北大湖的复合分级归并后要能被老手筛出来） ----------------
+- id: q29
+  kind: retrieval
+  question: 北大湖适合老手挑战的雪道
+  level: advanced
+  expect_any:
+    - ['北大湖', '高级道']
+    - ['北大湖', '中高级道']
+
+# ---------------- 拒答（这两座仍未收录，必须继续拒答） ----------------
+- id: r05
+  kind: refusal
+  question: 亚布力雪票多少钱
+  expect_any: []
+
+- id: r06
+  kind: refusal
+  question: 军都山滑雪场有几条雪道
+  # 2026-09-13：富龙 → 银河 两次失效后换成军都山；体检脚本会在评估前自动告警。
+  expect_any: []
+
+# ---------------- 中国境内未收录雪场（2026-10-07 扩充：新疆阿勒泰 / 东北 / 哈尔滨周边） ----------------
+# ⚠️ 将军山（阿勒泰）**已收录**（见 q23），不能拿来当拒答题——问它会命中真资料而非拒答。
+#    选未收录雪场时先确认 detect() 认不出它，否则用例必然假红。
+- id: r07
+  kind: refusal
+  question: 可可托海雪票多少钱
+  expect_any: []
+
+- id: r08
+  kind: refusal
+  question: 禾木雪票多少钱
+  # 不带"滑雪场"后缀，靠 uncovered_resorts.yaml 里吉克普林的别名"禾木"拦截
+  expect_any: []
+
+- id: r09
+  kind: refusal
+  question: 长白山万达雪票多少钱
+  expect_any: []
+
+- id: r10
+  kind: refusal
+  question: 帽儿山滑雪场有几条雪道
+  expect_any: []
+
+# ---------------- 崇礼三座（2026-09-13 第三批扩充：太舞 / 云顶 / 富龙） ----------------
+- id: q30
+  kind: retrieval
+  question: 太舞滑雪小镇有几条雪道
+  expect_any:
+    - ['太舞', '22']
+
+- id: q31
+  kind: retrieval
+  question: 太舞的狐步道怎么样
+  expect_any:
+    - ['狐步']
+
+- id: q32
+  kind: retrieval
+  question: 富龙滑雪场有多少条雪道
+  expect_any:
+    - ['富龙', '33']
+
+- id: q33
+  kind: retrieval
+  question: 云顶滑雪场有几条雪道
+  expect_any:
+    - ['云顶', '32']
+    - ['云顶', '39']
+
+- id: q34
+  kind: retrieval
+  question: 云顶的缆车运力怎么样
+  expect_any:
+    - ['缆车', '运力']
+
+- id: q35
+  kind: retrieval
+  question: 富龙的夜场票多少钱
+  expect_any:
+    - ['富龙', '夜场']
+
+# ---------------- 崇礼第四批（2026-09-13：银河 / 拾雪川 / 雪如意 / 多乐美地） ----------------
+# 2026-10-03：坑 #24（delete 触发 compaction 导致向量库读不出来）已修复，这 4 条数据
+# 确实已在库里（12 座雪场 / 538 chunk），因此去掉 pending 转为正式用例。
+# 原注释"数据已备好但未进向量库"已过期——评估里被静默跳过的用例等于没有覆盖。
+- id: q36
+  kind: retrieval
+  question: 翠云山银河滑雪场有几条雪道
+  expect_any:
+    - ['银河', '12']
+
+- id: q37
+  kind: retrieval
+  question: 拾雪川滑雪场适合新手吗
+  expect_any:
+    - ['拾雪川', '初级']
+    - ['拾雪川', '中级']
+
+- id: q38
+  kind: retrieval
+  question: 雪如意滑雪场有多少条雪道
+  expect_any:
+    - ['雪如意', '24']
+
+- id: q39
+  kind: retrieval
+  question: 多乐美地滑雪场有哪些雪道
+  expect_any:
+    - ['多乐美地', '雪道「']
+
+# ---------------- 口径冲突难例（2026-10-07 新增） ----------------
+# 这三座的档案里都留有"来源之间打架"的证据。正确的召回目标不是某个数字，
+# 而是那条**说明口径冲突、明确不下断言**的 chunk——给单一数字反而是错。
+- id: h01
+  kind: retrieval
+  question: 北大湖一共有几条雪道
+  expect_any:
+    # 同一条 chunk 里必须同时出现"来源总数 74"与"分级合计 33"：
+    # 只给其中一个数（74 或 33）都不算命中，这正是复合口径的考点
+    - ['74 条雪道', '33 条']
+
+- id: h02
+  kind: retrieval
+  question: 丝绸之路有几条雪道
+  expect_any:
+    - ['不对总数做断言']
+    - ['来源之间不一致']
+
+- id: h03
+  kind: retrieval
+  question: 松花湖有几条高级道
+  # 松花湖只有总数口径（50 条），没有分级数字；应召回到那条"不能给分级数字"的说明
+  expect_any:
+    - ['不能给分级数字']
+
+# ---------------- 留寿都（2026-10-11 收录；金额是官网正文，仍不可当完整预算） ----------------
+# r01 继续问二世谷，用来确认不会把留寿都的日元价格答给相邻雪场。
+- id: q40
+  kind: retrieval
+  question: 留寿都从新千岁机场过来的大巴多少钱
+  expected_resort: rusutsu
+  expect_any:
+    - ['5000', 'JPY', '单程']
+
+- id: q41
+  kind: retrieval
+  question: 留寿都英语私教两小时多少钱
+  expected_resort: rusutsu
+  expect_any:
+    - ['51000', '按教练']
+
+- id: q42
+  kind: retrieval
+  question: 留寿都常规季成人五小时雪票网上多少钱
+  expected_resort: rusutsu
+  expect_any:
+    - ['11600', 'JPY']
+
+- id: q43
+  kind: retrieval
+  question: 留寿都双板租赁一天多少钱
+  # 问双板租赁时，必须先召回“没有可审阅一日价、不能用单板价代替”，而不是单板或课程价。
+  expected_resort: rusutsu
+  expect_any:
+    - ['双板', '没有留存可审阅']
+
+- id: q44
+  kind: retrieval
+  question: 留寿都常规季成人一日雪票网上多少钱
+  expected_resort: rusutsu
+  expect_any:
+    - ['13200', 'JPY']
+
+# ---------------- 北大湖完整案例（2026-10-11：打卡点 / 分层 / Ikon Pass；仍无价格） ----------------
+- id: q45
+  kind: retrieval
+  question: 北大湖哪里看雾凇
+  expected_resort: beidahu
+  expect_any:
+    - ['G 索', '雾凇']
+
+- id: q46
+  kind: retrieval
+  question: 第一次去北大湖新手滑哪条雪道
+  expected_resort: beidahu
+  expect_any:
+    - ['星光大道', '初级']
+
+- id: q47
+  kind: retrieval
+  question: 北大湖能用Ikon Pass吗
+  expected_resort: beidahu
+  expect_any:
+    - ['Ikon Pass', '不可用日期']
+
+- id: q48
+  kind: retrieval
+  question: 北大湖夜场能滑哪些雪道
+  expected_resort: beidahu
+  expect_any:
+    - ['夜滑雪道', 'D9']
+
+- id: q49
+  kind: retrieval
+  question: 北大湖在哪？
+  expected_resort: beidahu
+  expect_any:
+    - ['位于吉林市', '吉林省']

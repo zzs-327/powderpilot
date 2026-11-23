@@ -1,0 +1,758 @@
+- id: beidahu:location0
+  kind: retrieval
+  question: 北大湖在哪里
+  expect_any:
+  - - 北大湖滑雪度假区
+    - 吉林市（吉林省）
+  expected_resort: beidahu
+- id: beidahu:location1
+  kind: retrieval
+  question: 北大湖位于哪个地区
+  expect_any:
+  - - 北大湖滑雪度假区
+    - 吉林市（吉林省）
+  expected_resort: beidahu
+- id: beidahu:location2
+  kind: retrieval
+  question: 北大湖的地址在哪
+  expect_any:
+  - - 北大湖滑雪度假区
+    - 吉林市（吉林省）
+  expected_resort: beidahu
+- id: beidahu:count
+  kind: retrieval
+  question: 北大湖一共有几条雪道
+  expect_any:
+  - - 北大湖滑雪度假区
+    - '74'
+  expected_resort: beidahu
+- id: beidahu:beginner
+  kind: retrieval
+  question: 北大湖有几条初级道
+  expect_any:
+  - - 北大湖滑雪度假区
+    - 初级道 7 条
+  expected_resort: beidahu
+- id: beidahu:intermediate
+  kind: retrieval
+  question: 北大湖有几条中级道
+  expect_any:
+  - - 北大湖滑雪度假区
+    - 中级道 16 条
+  expected_resort: beidahu
+- id: beidahu:advanced
+  kind: retrieval
+  question: 北大湖有几条高级道
+  expect_any:
+  - - 北大湖滑雪度假区
+    - 高级道 10 条
+  expected_resort: beidahu
+- id: beidahu:run0
+  kind: retrieval
+  question: 北大湖的阳光大道是什么难度
+  expect_any:
+  - - 北大湖滑雪度假区
+    - 阳光大道
+    - 中级道
+  expected_resort: beidahu
+- id: beidahu:run1
+  kind: retrieval
+  question: 北大湖的凌云大道是什么难度
+  expect_any:
+  - - 北大湖滑雪度假区
+    - 凌云大道
+    - 高级道
+  expected_resort: beidahu
+- id: beidahu:lift0
+  kind: retrieval
+  question: 北大湖的B索有什么参数
+  expect_any:
+  - - 北大湖滑雪度假区
+    - B索
+  expected_resort: beidahu
+- id: duolemeidi:location0
+  kind: retrieval
+  question: 多乐美地在哪里
+  expect_any:
+  - - 多乐美地滑雪场
+    - 河北崇礼
+  expected_resort: duolemeidi
+- id: duolemeidi:location1
+  kind: retrieval
+  question: 多乐美地位于哪个地区
+  expect_any:
+  - - 多乐美地滑雪场
+    - 河北崇礼
+  expected_resort: duolemeidi
+- id: duolemeidi:location2
+  kind: retrieval
+  question: 多乐美地的地址在哪
+  expect_any:
+  - - 多乐美地滑雪场
+    - 河北崇礼
+  expected_resort: duolemeidi
+- id: duolemeidi:count
+  kind: retrieval
+  question: 多乐美地一共有几条雪道
+  expect_any:
+  - - 多乐美地滑雪场
+    - '9'
+  expected_resort: duolemeidi
+- id: duolemeidi:beginner
+  kind: retrieval
+  question: 多乐美地有几条初级道
+  expect_any:
+  - - 多乐美地滑雪场
+    - 初级道 1 条
+  expected_resort: duolemeidi
+- id: duolemeidi:intermediate
+  kind: retrieval
+  question: 多乐美地有几条中级道
+  expect_any:
+  - - 多乐美地滑雪场
+    - 中级道 5 条
+  expected_resort: duolemeidi
+- id: duolemeidi:advanced
+  kind: retrieval
+  question: 多乐美地有几条高级道
+  expect_any:
+  - - 多乐美地滑雪场
+    - 高级道 1 条
+  expected_resort: duolemeidi
+- id: duolemeidi:run0
+  kind: retrieval
+  question: 多乐美地的A-罗马是什么难度
+  expect_any:
+  - - 多乐美地滑雪场
+    - A-罗马
+    - 初级
+  expected_resort: duolemeidi
+- id: duolemeidi:run1
+  kind: retrieval
+  question: 多乐美地的B-米兰是什么难度
+  expect_any:
+  - - 多乐美地滑雪场
+    - B-米兰
+    - 中级
+  expected_resort: duolemeidi
+- id: duolemeidi:lift0
+  kind: retrieval
+  question: 多乐美地的1号缆车有什么参数
+  expect_any:
+  - - 多乐美地滑雪场
+    - 1号缆车
+  expected_resort: duolemeidi
+- id: fulong:location0
+  kind: retrieval
+  question: 富龙在哪里
+  expect_any:
+  - - 富龙滑雪场
+    - 河北崇礼
+  expected_resort: fulong
+- id: fulong:location1
+  kind: retrieval
+  question: 富龙位于哪个地区
+  expect_any:
+  - - 富龙滑雪场
+    - 河北崇礼
+  expected_resort: fulong
+- id: fulong:location2
+  kind: retrieval
+  question: 富龙的地址在哪
+  expect_any:
+  - - 富龙滑雪场
+    - 河北崇礼
+  expected_resort: fulong
+- id: fulong:count
+  kind: retrieval
+  question: 富龙一共有几条雪道
+  expect_any:
+  - - 富龙滑雪场
+    - '33'
+  expected_resort: fulong
+- id: fulong:beginner
+  kind: retrieval
+  question: 富龙有几条初级道
+  expect_any:
+  - - 富龙滑雪场
+    - 初级道 9 条
+  expected_resort: fulong
+- id: fulong:intermediate
+  kind: retrieval
+  question: 富龙有几条中级道
+  expect_any:
+  - - 富龙滑雪场
+    - 中级道 6 条
+  expected_resort: fulong
+- id: fulong:advanced
+  kind: retrieval
+  question: 富龙有几条高级道
+  expect_any:
+  - - 富龙滑雪场
+    - 高级道 16 条
+  expected_resort: fulong
+- id: fulong:run0
+  kind: retrieval
+  question: 富龙的A1-蓝调是什么难度
+  expect_any:
+  - - 富龙滑雪场
+    - A1-蓝调
+    - 初级道
+  expected_resort: fulong
+- id: fulong:run1
+  kind: retrieval
+  question: 富龙的A2-管弦是什么难度
+  expect_any:
+  - - 富龙滑雪场
+    - A2-管弦
+    - 初级道
+  expected_resort: fulong
+- id: jiangjunshan:location0
+  kind: retrieval
+  question: 将军山在哪里
+  expect_any:
+  - - 将军山国际滑雪度假区
+    - 新疆阿勒泰
+  expected_resort: jiangjunshan
+- id: jiangjunshan:location1
+  kind: retrieval
+  question: 将军山位于哪个地区
+  expect_any:
+  - - 将军山国际滑雪度假区
+    - 新疆阿勒泰
+  expected_resort: jiangjunshan
+- id: jiangjunshan:location2
+  kind: retrieval
+  question: 将军山的地址在哪
+  expect_any:
+  - - 将军山国际滑雪度假区
+    - 新疆阿勒泰
+  expected_resort: jiangjunshan
+- id: jiangjunshan:count
+  kind: retrieval
+  question: 将军山一共有几条雪道
+  expect_any:
+  - - 将军山国际滑雪度假区
+    - '61'
+  expected_resort: jiangjunshan
+- id: jiangjunshan:beginner
+  kind: retrieval
+  question: 将军山有几条初级道
+  expect_any:
+  - - 将军山国际滑雪度假区
+    - 初级道 15 条
+  expected_resort: jiangjunshan
+- id: jiangjunshan:intermediate
+  kind: retrieval
+  question: 将军山有几条中级道
+  expect_any:
+  - - 将军山国际滑雪度假区
+    - 中级道 18 条
+  expected_resort: jiangjunshan
+- id: jiangjunshan:advanced
+  kind: retrieval
+  question: 将军山有几条高级道
+  expect_any:
+  - - 将军山国际滑雪度假区
+    - 高级道 15 条
+  expected_resort: jiangjunshan
+- id: shixuechuan:location0
+  kind: retrieval
+  question: 拾雪川在哪里
+  expect_any:
+  - - 阿那亚拾雪川滑雪场
+    - 河北崇礼
+  expected_resort: shixuechuan
+- id: shixuechuan:location1
+  kind: retrieval
+  question: 拾雪川位于哪个地区
+  expect_any:
+  - - 阿那亚拾雪川滑雪场
+    - 河北崇礼
+  expected_resort: shixuechuan
+- id: shixuechuan:location2
+  kind: retrieval
+  question: 拾雪川的地址在哪
+  expect_any:
+  - - 阿那亚拾雪川滑雪场
+    - 河北崇礼
+  expected_resort: shixuechuan
+- id: shixuechuan:count
+  kind: retrieval
+  question: 拾雪川一共有几条雪道
+  expect_any:
+  - - 阿那亚拾雪川滑雪场
+    - '8'
+  expected_resort: shixuechuan
+- id: shixuechuan:beginner
+  kind: retrieval
+  question: 拾雪川有几条初级道
+  expect_any:
+  - - 阿那亚拾雪川滑雪场
+    - 初级道 2 条
+  expected_resort: shixuechuan
+- id: shixuechuan:intermediate
+  kind: retrieval
+  question: 拾雪川有几条中级道
+  expect_any:
+  - - 阿那亚拾雪川滑雪场
+    - 中级道 6 条
+  expected_resort: shixuechuan
+- id: shixuechuan:advanced
+  kind: retrieval
+  question: 拾雪川有几条高级道
+  expect_any:
+  - - 阿那亚拾雪川滑雪场
+    - 高级道 0 条
+  expected_resort: shixuechuan
+- id: shixuechuan:run0
+  kind: retrieval
+  question: 拾雪川的A1-晴空是什么难度
+  expect_any:
+  - - 阿那亚拾雪川滑雪场
+    - A1-晴空
+    - 初级道
+  expected_resort: shixuechuan
+- id: shixuechuan:run1
+  kind: retrieval
+  question: 拾雪川的A2-沐风是什么难度
+  expect_any:
+  - - 阿那亚拾雪川滑雪场
+    - A2-沐风
+    - 初级道
+  expected_resort: shixuechuan
+- id: silkroad:location0
+  kind: retrieval
+  question: 丝绸之路在哪里
+  expect_any:
+  - - 丝绸之路国际滑雪场
+    - 新疆乌鲁木齐（南山·水西沟镇平西梁）
+  expected_resort: silkroad
+- id: silkroad:location1
+  kind: retrieval
+  question: 丝绸之路位于哪个地区
+  expect_any:
+  - - 丝绸之路国际滑雪场
+    - 新疆乌鲁木齐（南山·水西沟镇平西梁）
+  expected_resort: silkroad
+- id: silkroad:location2
+  kind: retrieval
+  question: 丝绸之路的地址在哪
+  expect_any:
+  - - 丝绸之路国际滑雪场
+    - 新疆乌鲁木齐（南山·水西沟镇平西梁）
+  expected_resort: silkroad
+- id: silkroad:run0
+  kind: retrieval
+  question: 丝绸之路的玄奘大道是什么难度
+  expect_any:
+  - - 丝绸之路国际滑雪场
+    - 玄奘大道
+    - 高级
+  expected_resort: silkroad
+- id: silkroad:run1
+  kind: retrieval
+  question: 丝绸之路的艾文大道是什么难度
+  expect_any:
+  - - 丝绸之路国际滑雪场
+    - 艾文大道
+    - 高级
+  expected_resort: silkroad
+- id: silkroad:lift0
+  kind: retrieval
+  question: 丝绸之路的3号缆车有什么参数
+  expect_any:
+  - - 丝绸之路国际滑雪场
+    - 3号缆车
+  expected_resort: silkroad
+- id: songhuahu:location0
+  kind: retrieval
+  question: 松花湖在哪里
+  expect_any:
+  - - 万科松花湖度假区
+    - 吉林市（吉林省）
+  expected_resort: songhuahu
+- id: songhuahu:location1
+  kind: retrieval
+  question: 松花湖位于哪个地区
+  expect_any:
+  - - 万科松花湖度假区
+    - 吉林市（吉林省）
+  expected_resort: songhuahu
+- id: songhuahu:location2
+  kind: retrieval
+  question: 松花湖的地址在哪
+  expect_any:
+  - - 万科松花湖度假区
+    - 吉林市（吉林省）
+  expected_resort: songhuahu
+- id: songhuahu:count
+  kind: retrieval
+  question: 松花湖一共有几条雪道
+  expect_any:
+  - - 万科松花湖度假区
+    - '50'
+  expected_resort: songhuahu
+- id: taiwu:location0
+  kind: retrieval
+  question: 太舞在哪里
+  expect_any:
+  - - 太舞滑雪小镇
+    - 河北崇礼
+  expected_resort: taiwu
+- id: taiwu:location1
+  kind: retrieval
+  question: 太舞位于哪个地区
+  expect_any:
+  - - 太舞滑雪小镇
+    - 河北崇礼
+  expected_resort: taiwu
+- id: taiwu:location2
+  kind: retrieval
+  question: 太舞的地址在哪
+  expect_any:
+  - - 太舞滑雪小镇
+    - 河北崇礼
+  expected_resort: taiwu
+- id: taiwu:count
+  kind: retrieval
+  question: 太舞一共有几条雪道
+  expect_any:
+  - - 太舞滑雪小镇
+    - '22'
+  expected_resort: taiwu
+- id: taiwu:beginner
+  kind: retrieval
+  question: 太舞有几条初级道
+  expect_any:
+  - - 太舞滑雪小镇
+    - 初级道 5 条
+  expected_resort: taiwu
+- id: taiwu:intermediate
+  kind: retrieval
+  question: 太舞有几条中级道
+  expect_any:
+  - - 太舞滑雪小镇
+    - 中级道 11 条
+  expected_resort: taiwu
+- id: taiwu:advanced
+  kind: retrieval
+  question: 太舞有几条高级道
+  expect_any:
+  - - 太舞滑雪小镇
+    - 高级道 6 条
+  expected_resort: taiwu
+- id: taiwu:run0
+  kind: retrieval
+  question: 太舞的3-狐步是什么难度
+  expect_any:
+  - - 太舞滑雪小镇
+    - 3-狐步
+    - 初级道
+  expected_resort: taiwu
+- id: taiwu:run1
+  kind: retrieval
+  question: 太舞的8-曳步是什么难度
+  expect_any:
+  - - 太舞滑雪小镇
+    - 8-曳步
+    - 初级道
+  expected_resort: taiwu
+- id: wanlong:location0
+  kind: retrieval
+  question: 万龙在哪里
+  expect_any:
+  - - 万龙滑雪场
+    - 河北张家口崇礼
+  expected_resort: wanlong
+- id: wanlong:location1
+  kind: retrieval
+  question: 万龙位于哪个地区
+  expect_any:
+  - - 万龙滑雪场
+    - 河北张家口崇礼
+  expected_resort: wanlong
+- id: wanlong:location2
+  kind: retrieval
+  question: 万龙的地址在哪
+  expect_any:
+  - - 万龙滑雪场
+    - 河北张家口崇礼
+  expected_resort: wanlong
+- id: wanlong:count
+  kind: retrieval
+  question: 万龙一共有几条雪道
+  expect_any:
+  - - 万龙滑雪场
+    - '22'
+  expected_resort: wanlong
+- id: wanlong:beginner
+  kind: retrieval
+  question: 万龙有几条初级道
+  expect_any:
+  - - 万龙滑雪场
+    - 初级道 4 条
+  expected_resort: wanlong
+- id: wanlong:intermediate
+  kind: retrieval
+  question: 万龙有几条中级道
+  expect_any:
+  - - 万龙滑雪场
+    - 中级道 9 条
+  expected_resort: wanlong
+- id: wanlong:advanced
+  kind: retrieval
+  question: 万龙有几条高级道
+  expect_any:
+  - - 万龙滑雪场
+    - 高级道 19 条
+  expected_resort: wanlong
+- id: wanlong:run0
+  kind: retrieval
+  question: 万龙的长龙道是什么难度
+  expect_any:
+  - - 万龙滑雪场
+    - 长龙道
+    - 初级
+  expected_resort: wanlong
+- id: wanlong:run1
+  kind: retrieval
+  question: 万龙的短龙道是什么难度
+  expect_any:
+  - - 万龙滑雪场
+    - 短龙道
+    - 初级
+  expected_resort: wanlong
+- id: wanlong:lift0
+  kind: retrieval
+  question: 万龙的1索有什么参数
+  expect_any:
+  - - 万龙滑雪场
+    - 1索
+  expected_resort: wanlong
+- id: xueruyi:location0
+  kind: retrieval
+  question: 雪如意在哪里
+  expect_any:
+  - - 雪如意滑雪场
+    - 河北崇礼
+  expected_resort: xueruyi
+- id: xueruyi:location1
+  kind: retrieval
+  question: 雪如意位于哪个地区
+  expect_any:
+  - - 雪如意滑雪场
+    - 河北崇礼
+  expected_resort: xueruyi
+- id: xueruyi:location2
+  kind: retrieval
+  question: 雪如意的地址在哪
+  expect_any:
+  - - 雪如意滑雪场
+    - 河北崇礼
+  expected_resort: xueruyi
+- id: xueruyi:count
+  kind: retrieval
+  question: 雪如意一共有几条雪道
+  expect_any:
+  - - 雪如意滑雪场
+    - '24'
+  expected_resort: xueruyi
+- id: xueruyi:beginner
+  kind: retrieval
+  question: 雪如意有几条初级道
+  expect_any:
+  - - 雪如意滑雪场
+    - 初级道 8 条
+  expected_resort: xueruyi
+- id: xueruyi:intermediate
+  kind: retrieval
+  question: 雪如意有几条中级道
+  expect_any:
+  - - 雪如意滑雪场
+    - 中级道 12 条
+  expected_resort: xueruyi
+- id: xueruyi:advanced
+  kind: retrieval
+  question: 雪如意有几条高级道
+  expect_any:
+  - - 雪如意滑雪场
+    - 高级道 4 条
+  expected_resort: xueruyi
+- id: xueruyi:run0
+  kind: retrieval
+  question: 雪如意的A1是什么难度
+  expect_any:
+  - - 雪如意滑雪场
+    - A1
+    - 初级道
+  expected_resort: xueruyi
+- id: xueruyi:run1
+  kind: retrieval
+  question: 雪如意的B2是什么难度
+  expect_any:
+  - - 雪如意滑雪场
+    - B2
+    - 初级道
+  expected_resort: xueruyi
+- id: yinhe:location0
+  kind: retrieval
+  question: 银河在哪里
+  expect_any:
+  - - 翠云山银河滑雪场
+    - 河北崇礼
+  expected_resort: yinhe
+- id: yinhe:location1
+  kind: retrieval
+  question: 银河位于哪个地区
+  expect_any:
+  - - 翠云山银河滑雪场
+    - 河北崇礼
+  expected_resort: yinhe
+- id: yinhe:location2
+  kind: retrieval
+  question: 银河的地址在哪
+  expect_any:
+  - - 翠云山银河滑雪场
+    - 河北崇礼
+  expected_resort: yinhe
+- id: yinhe:count
+  kind: retrieval
+  question: 银河一共有几条雪道
+  expect_any:
+  - - 翠云山银河滑雪场
+    - '12'
+  expected_resort: yinhe
+- id: yinhe:beginner
+  kind: retrieval
+  question: 银河有几条初级道
+  expect_any:
+  - - 翠云山银河滑雪场
+    - 初级道 4 条
+  expected_resort: yinhe
+- id: yinhe:intermediate
+  kind: retrieval
+  question: 银河有几条中级道
+  expect_any:
+  - - 翠云山银河滑雪场
+    - 中级道 5 条
+  expected_resort: yinhe
+- id: yinhe:advanced
+  kind: retrieval
+  question: 银河有几条高级道
+  expect_any:
+  - - 翠云山银河滑雪场
+    - 高级道 3 条
+  expected_resort: yinhe
+- id: yinhe:run0
+  kind: retrieval
+  question: 银河的B5-处女座是什么难度
+  expect_any:
+  - - 翠云山银河滑雪场
+    - B5-处女座
+    - 初级道
+  expected_resort: yinhe
+- id: yinhe:run1
+  kind: retrieval
+  question: 银河的B10-双子座是什么难度
+  expect_any:
+  - - 翠云山银河滑雪场
+    - B10-双子座
+    - 初级道
+  expected_resort: yinhe
+- id: yunding:location0
+  kind: retrieval
+  question: 云顶在哪里
+  expect_any:
+  - - 密苑云顶滑雪场
+    - 河北崇礼
+  expected_resort: yunding
+- id: yunding:location1
+  kind: retrieval
+  question: 云顶位于哪个地区
+  expect_any:
+  - - 密苑云顶滑雪场
+    - 河北崇礼
+  expected_resort: yunding
+- id: yunding:location2
+  kind: retrieval
+  question: 云顶的地址在哪
+  expect_any:
+  - - 密苑云顶滑雪场
+    - 河北崇礼
+  expected_resort: yunding
+- id: yunding:count
+  kind: retrieval
+  question: 云顶一共有几条雪道
+  expect_any:
+  - - 密苑云顶滑雪场
+    - '32'
+  expected_resort: yunding
+- id: yunding:beginner
+  kind: retrieval
+  question: 云顶有几条初级道
+  expect_any:
+  - - 密苑云顶滑雪场
+    - 初级道 3 条
+  expected_resort: yunding
+- id: yunding:intermediate
+  kind: retrieval
+  question: 云顶有几条中级道
+  expect_any:
+  - - 密苑云顶滑雪场
+    - 中级道 16 条
+  expected_resort: yunding
+- id: yunding:advanced
+  kind: retrieval
+  question: 云顶有几条高级道
+  expect_any:
+  - - 密苑云顶滑雪场
+    - 高级道 13 条
+  expected_resort: yunding
+- id: yunding:run0
+  kind: retrieval
+  question: 云顶的锦带花是什么难度
+  expect_any:
+  - - 密苑云顶滑雪场
+    - 锦带花
+    - 初级道
+  expected_resort: yunding
+- id: yunding:run1
+  kind: retrieval
+  question: 云顶的雪绒花是什么难度
+  expect_any:
+  - - 密苑云顶滑雪场
+    - 雪绒花
+    - 初级道
+  expected_resort: yunding
+- id: yunding:lift0
+  kind: retrieval
+  question: 云顶的1号缆车有什么参数
+  expect_any:
+  - - 密苑云顶滑雪场
+    - 1号缆车
+  expected_resort: yunding
+- id: refusal:二世谷
+  kind: refusal
+  question: 二世谷雪票多少钱
+- id: refusal:南山滑雪场
+  kind: refusal
+  question: 南山滑雪场雪票多少钱
+- id: refusal:亚布力
+  kind: refusal
+  question: 亚布力雪票多少钱
+- id: refusal:军都山滑雪场
+  kind: refusal
+  question: 军都山滑雪场雪票多少钱
+- id: refusal:可可托海
+  kind: refusal
+  question: 可可托海雪票多少钱
+- id: refusal:吉克普林
+  kind: refusal
+  question: 吉克普林雪票多少钱
+- id: refusal:长白山
+  kind: refusal
+  question: 长白山雪票多少钱
+- id: refusal:帽儿山滑雪场
+  kind: refusal
+  question: 帽儿山滑雪场雪票多少钱

@@ -1,0 +1,1456 @@
+generated_at: '2026-10-05'
+source: data/resorts/*.yaml（确定性派生，改数据后重新生成即可）
+count: 125
+questions:
+- id: q001
+  kind: price_missing
+  resort: beidahu
+  question: 北大湖雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 暂无
+  - 没有
+  - 未收录
+  - 没有收录
+  note: 北大湖滑雪度假区 收录但无价格数据（这是一道"该说没有"的题）
+- id: q002
+  kind: runs_count
+  resort: beidahu
+  question: 北大湖有几条高级道？
+  followup: ''
+  expect_numbers:
+  - 10
+  expect_keywords: []
+  note: 北大湖滑雪度假区 高级道 10 条
+- id: q003
+  kind: runs_count
+  resort: beidahu
+  question: 北大湖有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 16
+  expect_keywords: []
+  note: 北大湖滑雪度假区 中级道 16 条
+- id: q004
+  kind: runs_total
+  resort: beidahu
+  question: 北大湖一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 33
+  expect_keywords: []
+  note: 北大湖滑雪度假区 分难度合计 33 条（注意与"来源声明总数"可能不同口径）
+- id: q005
+  kind: level
+  resort: beidahu
+  question: 北大湖适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 北大湖滑雪度假区 新手（档案里有 by_level 说明）
+- id: q006
+  kind: level
+  resort: beidahu
+  question: 北大湖适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 北大湖滑雪度假区 中级（档案里有 by_level 说明）
+- id: q007
+  kind: meta
+  resort: beidahu
+  question: 北大湖的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 北大湖滑雪度假区 可信度档位
+- id: q008
+  kind: lifts
+  resort: beidahu
+  question: 北大湖有哪些索道？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - B索
+  - C索
+  - D索
+  - E索
+  - UU索
+  - 5索
+  note: 北大湖滑雪度假区 收录 10 条索道
+- id: q009
+  kind: price_missing
+  resort: duolemeidi
+  question: 多乐美地雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 暂无
+  - 没有
+  - 未收录
+  - 没有收录
+  note: 多乐美地滑雪场 收录但无价格数据（这是一道"该说没有"的题）
+- id: q010
+  kind: runs_count
+  resort: duolemeidi
+  question: 多乐美地有几条高级道？
+  followup: ''
+  expect_numbers:
+  - 1
+  expect_keywords: []
+  note: 多乐美地滑雪场 高级道 1 条
+- id: q011
+  kind: runs_count
+  resort: duolemeidi
+  question: 多乐美地有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 5
+  expect_keywords: []
+  note: 多乐美地滑雪场 中级道 5 条
+- id: q012
+  kind: runs_total
+  resort: duolemeidi
+  question: 多乐美地一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 7
+  expect_keywords: []
+  note: 多乐美地滑雪场 分难度合计 7 条（注意与"来源声明总数"可能不同口径）
+- id: q013
+  kind: level
+  resort: duolemeidi
+  question: 多乐美地适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 多乐美地滑雪场 新手（档案里有 by_level 说明）
+- id: q014
+  kind: level
+  resort: duolemeidi
+  question: 多乐美地适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 多乐美地滑雪场 中级（档案里有 by_level 说明）
+- id: q015
+  kind: meta
+  resort: duolemeidi
+  question: 多乐美地的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 多乐美地滑雪场 可信度档位
+- id: q016
+  kind: lifts
+  resort: duolemeidi
+  question: 多乐美地有哪些索道？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 1号缆车
+  - 2号缆车
+  - 牵拖
+  - 魔毯
+  note: 多乐美地滑雪场 收录 4 条索道
+- id: q017
+  kind: price
+  resort: fulong
+  question: 富龙雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 183
+  - 608
+  - 261
+  - 764
+  - 396
+  - 1235
+  - 473
+  - 1376
+  - 105
+  - 210
+  - 124
+  - 441
+  expect_keywords: []
+  note: 富龙滑雪场 共 14 条价格
+- id: q018
+  kind: price_tier
+  resort: fulong
+  question: 富龙节假日的雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 608
+  - 764
+  - 1235
+  - 1376
+  expect_keywords: []
+  note: 节假日档
+- id: q019
+  kind: price_item
+  resort: fulong
+  question: 富龙有夜场票吗？多少钱？
+  followup: ''
+  expect_numbers:
+  - 124
+  - 441
+  expect_keywords: []
+  note: 夜场项
+- id: q020
+  kind: runs_count
+  resort: fulong
+  question: 富龙有几条高级道？
+  followup: ''
+  expect_numbers:
+  - 16
+  expect_keywords: []
+  note: 富龙滑雪场 高级道 16 条
+- id: q021
+  kind: runs_count
+  resort: fulong
+  question: 富龙有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 6
+  expect_keywords: []
+  note: 富龙滑雪场 中级道 6 条
+- id: q022
+  kind: runs_total
+  resort: fulong
+  question: 富龙一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 31
+  expect_keywords: []
+  note: 富龙滑雪场 分难度合计 31 条（注意与"来源声明总数"可能不同口径）
+- id: q023
+  kind: level
+  resort: fulong
+  question: 富龙适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 富龙滑雪场 新手（档案里有 by_level 说明）
+- id: q024
+  kind: level
+  resort: fulong
+  question: 富龙适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 富龙滑雪场 中级（档案里有 by_level 说明）
+- id: q025
+  kind: meta
+  resort: fulong
+  question: 富龙的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 富龙滑雪场 可信度档位
+- id: q026
+  kind: price_missing
+  resort: jiangjunshan
+  question: 将军山雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 暂无
+  - 没有
+  - 未收录
+  - 没有收录
+  note: 将军山国际滑雪度假区 收录但无价格数据（这是一道"该说没有"的题）
+- id: q027
+  kind: runs_count
+  resort: jiangjunshan
+  question: 将军山有几条高级道？
+  followup: ''
+  expect_numbers:
+  - 15
+  expect_keywords: []
+  note: 将军山国际滑雪度假区 高级道 15 条
+- id: q028
+  kind: runs_count
+  resort: jiangjunshan
+  question: 将军山有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 18
+  expect_keywords: []
+  note: 将军山国际滑雪度假区 中级道 18 条
+- id: q029
+  kind: runs_total
+  resort: jiangjunshan
+  question: 将军山一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 48
+  expect_keywords: []
+  note: 将军山国际滑雪度假区 分难度合计 48 条（注意与"来源声明总数"可能不同口径）
+- id: q030
+  kind: level
+  resort: jiangjunshan
+  question: 将军山适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 将军山国际滑雪度假区 新手（档案里有 by_level 说明）
+- id: q031
+  kind: level
+  resort: jiangjunshan
+  question: 将军山适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 将军山国际滑雪度假区 中级（档案里有 by_level 说明）
+- id: q032
+  kind: meta
+  resort: jiangjunshan
+  question: 将军山的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 将军山国际滑雪度假区 可信度档位
+- id: q033
+  kind: price_missing
+  resort: shixuechuan
+  question: 拾雪川雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 暂无
+  - 没有
+  - 未收录
+  - 没有收录
+  note: 阿那亚拾雪川滑雪场 收录但无价格数据（这是一道"该说没有"的题）
+- id: q034
+  kind: runs_count
+  resort: shixuechuan
+  question: 拾雪川有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 6
+  expect_keywords: []
+  note: 阿那亚拾雪川滑雪场 中级道 6 条
+- id: q035
+  kind: runs_total
+  resort: shixuechuan
+  question: 拾雪川一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 8
+  expect_keywords: []
+  note: 阿那亚拾雪川滑雪场 分难度合计 8 条（注意与"来源声明总数"可能不同口径）
+- id: q036
+  kind: level
+  resort: shixuechuan
+  question: 拾雪川适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 阿那亚拾雪川滑雪场 新手（档案里有 by_level 说明）
+- id: q037
+  kind: level
+  resort: shixuechuan
+  question: 拾雪川适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 阿那亚拾雪川滑雪场 中级（档案里有 by_level 说明）
+- id: q038
+  kind: meta
+  resort: shixuechuan
+  question: 拾雪川的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 阿那亚拾雪川滑雪场 可信度档位
+- id: q039
+  kind: price
+  resort: silkroad
+  question: 丝绸之路雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 149
+  - 169
+  - 189
+  - 209
+  - 289
+  - 329
+  - 189
+  - 209
+  - 249
+  - 369
+  - 299
+  - 349
+  expect_keywords: []
+  note: 丝绸之路国际滑雪场 共 27 条价格
+- id: q040
+  kind: price_tier
+  resort: silkroad
+  question: 丝绸之路平日的雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 149
+  - 169
+  - 189
+  - 209
+  expect_keywords: []
+  note: 平日档
+- id: q041
+  kind: price_tier
+  resort: silkroad
+  question: 丝绸之路周末的雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 189
+  - 209
+  - 249
+  - 349
+  expect_keywords: []
+  note: 周末档
+- id: q042
+  kind: price_tier
+  resort: silkroad
+  question: 丝绸之路节假日的雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 289
+  - 329
+  - 369
+  - 399
+  expect_keywords: []
+  note: 节假日档
+- id: q043
+  kind: price_item
+  resort: silkroad
+  question: 丝绸之路雪具租赁多少钱？
+  followup: ''
+  expect_numbers:
+  - 20
+  - 30
+  - 30
+  expect_keywords: []
+  note: 租赁项
+- id: q044
+  kind: level
+  resort: silkroad
+  question: 丝绸之路适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 丝绸之路国际滑雪场 新手（档案里有 by_level 说明）
+- id: q045
+  kind: level
+  resort: silkroad
+  question: 丝绸之路适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 丝绸之路国际滑雪场 中级（档案里有 by_level 说明）
+- id: q046
+  kind: meta
+  resort: silkroad
+  question: 丝绸之路的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 丝绸之路国际滑雪场 可信度档位
+- id: q047
+  kind: lifts
+  resort: silkroad
+  question: 丝绸之路有哪些索道？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 3号缆车
+  - 5号缆车
+  - 6号缆车
+  - 1号缆车
+  - 2号缆车
+  - 7号缆车
+  note: 丝绸之路国际滑雪场 收录 7 条索道
+- id: q048
+  kind: tips
+  resort: silkroad
+  question: 丝绸之路有什么注意事项？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 丝绸之路国际滑雪场 收录 10 条提示
+- id: q049
+  kind: price_missing
+  resort: songhuahu
+  question: 松花湖雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 暂无
+  - 没有
+  - 未收录
+  - 没有收录
+  note: 万科松花湖度假区 收录但无价格数据（这是一道"该说没有"的题）
+- id: q050
+  kind: meta
+  resort: songhuahu
+  question: 松花湖的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 万科松花湖度假区 可信度档位
+- id: q051
+  kind: price_missing
+  resort: taiwu
+  question: 太舞雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 暂无
+  - 没有
+  - 未收录
+  - 没有收录
+  note: 太舞滑雪小镇 收录但无价格数据（这是一道"该说没有"的题）
+- id: q052
+  kind: runs_count
+  resort: taiwu
+  question: 太舞有几条高级道？
+  followup: ''
+  expect_numbers:
+  - 6
+  expect_keywords: []
+  note: 太舞滑雪小镇 高级道 6 条
+- id: q053
+  kind: runs_count
+  resort: taiwu
+  question: 太舞有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 11
+  expect_keywords: []
+  note: 太舞滑雪小镇 中级道 11 条
+- id: q054
+  kind: runs_total
+  resort: taiwu
+  question: 太舞一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 22
+  expect_keywords: []
+  note: 太舞滑雪小镇 分难度合计 22 条（注意与"来源声明总数"可能不同口径）
+- id: q055
+  kind: level
+  resort: taiwu
+  question: 太舞适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 太舞滑雪小镇 新手（档案里有 by_level 说明）
+- id: q056
+  kind: level
+  resort: taiwu
+  question: 太舞适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 太舞滑雪小镇 中级（档案里有 by_level 说明）
+- id: q057
+  kind: meta
+  resort: taiwu
+  question: 太舞的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 太舞滑雪小镇 可信度档位
+- id: q058
+  kind: price
+  resort: wanlong
+  question: 万龙雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 560
+  - 650
+  - 800
+  - 360
+  - 960
+  - 268
+  - 760
+  - 850
+  - 840
+  - 200
+  - 300
+  - 60
+  expect_keywords: []
+  note: 万龙滑雪场 共 29 条价格
+- id: q059
+  kind: price_tier
+  resort: wanlong
+  question: 万龙平日的雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 560
+  - 360
+  - 960
+  - 760
+  expect_keywords: []
+  note: 平日档
+- id: q060
+  kind: price_tier
+  resort: wanlong
+  question: 万龙周末的雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 650
+  - 850
+  - 200
+  - 930
+  expect_keywords: []
+  note: 周末档
+- id: q061
+  kind: price_tier
+  resort: wanlong
+  question: 万龙节假日的雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 800
+  - 1100
+  - 1180
+  expect_keywords: []
+  note: 节假日档
+- id: q062
+  kind: price_item
+  resort: wanlong
+  question: 万龙雪具租赁多少钱？
+  followup: ''
+  expect_numbers:
+  - 200
+  - 300
+  - 60
+  - 30
+  expect_keywords: []
+  note: 租赁项
+- id: q063
+  kind: price_item
+  resort: wanlong
+  question: 万龙含雪具的雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 760
+  - 850
+  - 1100
+  - 479
+  expect_keywords: []
+  note: 含雪具项
+- id: q064
+  kind: price_item
+  resort: wanlong
+  question: 万龙有夜场票吗？多少钱？
+  followup: ''
+  expect_numbers:
+  - 268
+  - 188
+  expect_keywords: []
+  note: 夜场项
+- id: q065
+  kind: runs_count
+  resort: wanlong
+  question: 万龙有几条高级道？
+  followup: ''
+  expect_numbers:
+  - 19
+  expect_keywords: []
+  note: 万龙滑雪场 高级道 19 条
+- id: q066
+  kind: runs_count
+  resort: wanlong
+  question: 万龙有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 9
+  expect_keywords: []
+  note: 万龙滑雪场 中级道 9 条
+- id: q067
+  kind: runs_total
+  resort: wanlong
+  question: 万龙一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 32
+  expect_keywords: []
+  note: 万龙滑雪场 分难度合计 32 条（注意与"来源声明总数"可能不同口径）
+- id: q068
+  kind: level
+  resort: wanlong
+  question: 万龙适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 万龙滑雪场 新手（档案里有 by_level 说明）
+- id: q069
+  kind: level
+  resort: wanlong
+  question: 万龙适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 万龙滑雪场 中级（档案里有 by_level 说明）
+- id: q070
+  kind: meta
+  resort: wanlong
+  question: 万龙的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 万龙滑雪场 可信度档位
+- id: q071
+  kind: lifts
+  resort: wanlong
+  question: 万龙有哪些索道？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 1索
+  - 2索
+  - 4索
+  - 5索
+  - 6索
+  - 7索
+  note: 万龙滑雪场 收录 8 条索道
+- id: q072
+  kind: tips
+  resort: wanlong
+  question: 万龙有什么注意事项？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 万龙滑雪场 收录 10 条提示
+- id: q073
+  kind: price_missing
+  resort: xueruyi
+  question: 雪如意雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 暂无
+  - 没有
+  - 未收录
+  - 没有收录
+  note: 雪如意滑雪场 收录但无价格数据（这是一道"该说没有"的题）
+- id: q074
+  kind: runs_count
+  resort: xueruyi
+  question: 雪如意有几条高级道？
+  followup: ''
+  expect_numbers:
+  - 4
+  expect_keywords: []
+  note: 雪如意滑雪场 高级道 4 条
+- id: q075
+  kind: runs_count
+  resort: xueruyi
+  question: 雪如意有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 12
+  expect_keywords: []
+  note: 雪如意滑雪场 中级道 12 条
+- id: q076
+  kind: runs_total
+  resort: xueruyi
+  question: 雪如意一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 24
+  expect_keywords: []
+  note: 雪如意滑雪场 分难度合计 24 条（注意与"来源声明总数"可能不同口径）
+- id: q077
+  kind: level
+  resort: xueruyi
+  question: 雪如意适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 雪如意滑雪场 新手（档案里有 by_level 说明）
+- id: q078
+  kind: level
+  resort: xueruyi
+  question: 雪如意适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 雪如意滑雪场 中级（档案里有 by_level 说明）
+- id: q079
+  kind: meta
+  resort: xueruyi
+  question: 雪如意的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 雪如意滑雪场 可信度档位
+- id: q080
+  kind: price_missing
+  resort: yinhe
+  question: 银河雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 暂无
+  - 没有
+  - 未收录
+  - 没有收录
+  note: 翠云山银河滑雪场 收录但无价格数据（这是一道"该说没有"的题）
+- id: q081
+  kind: runs_count
+  resort: yinhe
+  question: 银河有几条高级道？
+  followup: ''
+  expect_numbers:
+  - 3
+  expect_keywords: []
+  note: 翠云山银河滑雪场 高级道 3 条
+- id: q082
+  kind: runs_count
+  resort: yinhe
+  question: 银河有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 5
+  expect_keywords: []
+  note: 翠云山银河滑雪场 中级道 5 条
+- id: q083
+  kind: runs_total
+  resort: yinhe
+  question: 银河一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 12
+  expect_keywords: []
+  note: 翠云山银河滑雪场 分难度合计 12 条（注意与"来源声明总数"可能不同口径）
+- id: q084
+  kind: level
+  resort: yinhe
+  question: 银河适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 翠云山银河滑雪场 新手（档案里有 by_level 说明）
+- id: q085
+  kind: level
+  resort: yinhe
+  question: 银河适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 翠云山银河滑雪场 中级（档案里有 by_level 说明）
+- id: q086
+  kind: meta
+  resort: yinhe
+  question: 银河的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 翠云山银河滑雪场 可信度档位
+- id: q087
+  kind: price
+  resort: yunding
+  question: 云顶雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 410
+  - 208
+  - 580
+  - 288
+  - 790
+  - 398
+  - 865
+  - 428
+  - 1215
+  - 608
+  - 300
+  - 148
+  expect_keywords: []
+  note: 密苑云顶滑雪场 共 28 条价格
+- id: q088
+  kind: price_item
+  resort: yunding
+  question: 云顶含雪具的雪票多少钱？
+  followup: ''
+  expect_numbers:
+  - 660
+  - 328
+  - 830
+  - 418
+  expect_keywords: []
+  note: 含雪具项
+- id: q089
+  kind: price_item
+  resort: yunding
+  question: 云顶有夜场票吗？多少钱？
+  followup: ''
+  expect_numbers:
+  - 300
+  - 148
+  - 580
+  - 288
+  expect_keywords: []
+  note: 夜场项
+- id: q090
+  kind: runs_count
+  resort: yunding
+  question: 云顶有几条高级道？
+  followup: ''
+  expect_numbers:
+  - 13
+  expect_keywords: []
+  note: 密苑云顶滑雪场 高级道 13 条
+- id: q091
+  kind: runs_count
+  resort: yunding
+  question: 云顶有几条中级道？
+  followup: ''
+  expect_numbers:
+  - 16
+  expect_keywords: []
+  note: 密苑云顶滑雪场 中级道 16 条
+- id: q092
+  kind: runs_total
+  resort: yunding
+  question: 云顶一共有几条雪道？
+  followup: ''
+  expect_numbers:
+  - 32
+  expect_keywords: []
+  note: 密苑云顶滑雪场 分难度合计 32 条（注意与"来源声明总数"可能不同口径）
+- id: q093
+  kind: level
+  resort: yunding
+  question: 云顶适合新手吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 密苑云顶滑雪场 新手（档案里有 by_level 说明）
+- id: q094
+  kind: level
+  resort: yunding
+  question: 云顶适合中级吗？
+  followup: ''
+  expect_numbers: []
+  expect_keywords: []
+  note: 密苑云顶滑雪场 中级（档案里有 by_level 说明）
+- id: q095
+  kind: meta
+  resort: yunding
+  question: 云顶的数据是几手的？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 已核对
+  - 多源印证
+  - 二手转引
+  - 示例
+  - 官方
+  - 转引
+  note: 密苑云顶滑雪场 可信度档位
+- id: q096
+  kind: lifts
+  resort: yunding
+  question: 云顶有哪些索道？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 1号缆车
+  - 3号缆车
+  - 5号缆车
+  - 6号缆车
+  - 22号缆车
+  note: 密苑云顶滑雪场 收录 5 条索道
+- id: q097
+  kind: refusal
+  resort: ''
+  question: 二世谷的雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 未收录
+  - 暂无
+  - 没有收录
+  - 没有相关
+  - 无法
+  - 不掌握
+  - 不清楚
+  - 没有该
+  - 查不到
+  - 没有这部分
+  note: 二世谷 本库未收录，应当拒答而不是拿相邻雪场数据补答
+- id: q098
+  kind: refusal
+  resort: ''
+  question: 长白山万达的雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 未收录
+  - 暂无
+  - 没有收录
+  - 没有相关
+  - 无法
+  - 不掌握
+  - 不清楚
+  - 没有该
+  - 查不到
+  - 没有这部分
+  note: 长白山万达 本库未收录，应当拒答而不是拿相邻雪场数据补答
+- id: q099
+  kind: refusal
+  resort: ''
+  question: 亚布力的雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 未收录
+  - 暂无
+  - 没有收录
+  - 没有相关
+  - 无法
+  - 不掌握
+  - 不清楚
+  - 没有该
+  - 查不到
+  - 没有这部分
+  note: 亚布力 本库未收录，应当拒答而不是拿相邻雪场数据补答
+- id: q100
+  kind: refusal
+  resort: ''
+  question: 阿斯彭的雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 未收录
+  - 暂无
+  - 没有收录
+  - 没有相关
+  - 无法
+  - 不掌握
+  - 不清楚
+  - 没有该
+  - 查不到
+  - 没有这部分
+  note: 阿斯彭 本库未收录，应当拒答而不是拿相邻雪场数据补答
+- id: q101
+  kind: refusal
+  resort: ''
+  question: 圣莫里茨的雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 未收录
+  - 暂无
+  - 没有收录
+  - 没有相关
+  - 无法
+  - 不掌握
+  - 不清楚
+  - 没有该
+  - 查不到
+  - 没有这部分
+  note: 圣莫里茨 本库未收录，应当拒答而不是拿相邻雪场数据补答
+- id: q102
+  kind: refusal
+  resort: ''
+  question: 札幌国际的雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 未收录
+  - 暂无
+  - 没有收录
+  - 没有相关
+  - 无法
+  - 不掌握
+  - 不清楚
+  - 没有该
+  - 查不到
+  - 没有这部分
+  note: 札幌国际 本库未收录，应当拒答而不是拿相邻雪场数据补答
+- id: q103
+  kind: refusal
+  resort: ''
+  question: 惠斯勒的雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 未收录
+  - 暂无
+  - 没有收录
+  - 没有相关
+  - 无法
+  - 不掌握
+  - 不清楚
+  - 没有该
+  - 查不到
+  - 没有这部分
+  note: 惠斯勒 本库未收录，应当拒答而不是拿相邻雪场数据补答
+- id: q104
+  kind: refusal
+  resort: ''
+  question: 霞慕尼的雪票多少钱？
+  followup: ''
+  expect_numbers: []
+  expect_keywords:
+  - 未收录
+  - 暂无
+  - 没有收录
+  - 没有相关
+  - 无法
+  - 不掌握
+  - 不清楚
+  - 没有该
+  - 查不到
+  - 没有这部分
+  note: 霞慕尼 本库未收录，应当拒答而不是拿相邻雪场数据补答
+- id: q105
+  kind: isolation
+  resort: fulong
+  question: 富龙和丝绸之路，哪个雪票更便宜？
+  followup: ''
+  expect_numbers:
+  - 183
+  - 608
+  - 261
+  - 764
+  - 396
+  - 1235
+  - 473
+  - 1376
+  expect_keywords: []
+  note: 答案里出现的金额必须都能在证据里找到（跨雪场串数据会立刻暴露）
+- id: q106
+  kind: isolation
+  resort: silkroad
+  question: 丝绸之路和万龙，哪个雪票更便宜？
+  followup: ''
+  expect_numbers:
+  - 149
+  - 169
+  - 189
+  - 209
+  - 289
+  - 329
+  - 189
+  - 209
+  expect_keywords: []
+  note: 答案里出现的金额必须都能在证据里找到（跨雪场串数据会立刻暴露）
+- id: q107
+  kind: isolation
+  resort: wanlong
+  question: 万龙和云顶，哪个雪票更便宜？
+  followup: ''
+  expect_numbers:
+  - 560
+  - 650
+  - 800
+  - 360
+  - 960
+  - 268
+  - 760
+  - 850
+  expect_keywords: []
+  note: 答案里出现的金额必须都能在证据里找到（跨雪场串数据会立刻暴露）
+- id: q108
+  kind: isolation
+  resort: yunding
+  question: 云顶和富龙，哪个雪票更便宜？
+  followup: ''
+  expect_numbers:
+  - 410
+  - 208
+  - 580
+  - 288
+  - 790
+  - 398
+  - 865
+  - 428
+  expect_keywords: []
+  note: 答案里出现的金额必须都能在证据里找到（跨雪场串数据会立刻暴露）
+- id: q109
+  kind: isolation
+  resort: yunding
+  question: 丝绸之路和云顶哪个贵？
+  followup: ''
+  expect_numbers:
+  - 410
+  - 208
+  - 580
+  - 288
+  - 790
+  - 398
+  - 865
+  - 428
+  expect_keywords: []
+  note: 反向再问一次，排除位置偏差
+- id: q110
+  kind: isolation
+  resort: wanlong
+  question: 万龙和万龙哪个贵？
+  followup: ''
+  expect_numbers:
+  - 560
+  - 650
+  - 800
+  - 360
+  - 960
+  - 268
+  - 760
+  - 850
+  expect_keywords: []
+  note: 反向再问一次，排除位置偏差
+- id: q111
+  kind: isolation
+  resort: silkroad
+  question: 云顶和丝绸之路哪个贵？
+  followup: ''
+  expect_numbers:
+  - 149
+  - 169
+  - 189
+  - 209
+  - 289
+  - 329
+  - 189
+  - 209
+  expect_keywords: []
+  note: 反向再问一次，排除位置偏差
+- id: q112
+  kind: isolation
+  resort: fulong
+  question: 富龙和富龙哪个贵？
+  followup: ''
+  expect_numbers:
+  - 183
+  - 608
+  - 261
+  - 764
+  - 396
+  - 1235
+  - 473
+  - 1376
+  expect_keywords: []
+  note: 反向再问一次，排除位置偏差
+- id: q113
+  kind: followup
+  resort: beidahu
+  question: 北大湖有几条高级道？
+  followup: 那北大湖呢，中级道有几条？
+  expect_numbers:
+  - 10
+  - 16
+  expect_keywords: []
+  note: 同一轮内追问，编号不能乱
+- id: q114
+  kind: followup
+  resort: duolemeidi
+  question: 多乐美地有几条高级道？
+  followup: 那多乐美地呢，中级道有几条？
+  expect_numbers:
+  - 1
+  - 5
+  expect_keywords: []
+  note: 同一轮内追问，编号不能乱
+- id: q115
+  kind: followup
+  resort: fulong
+  question: 富龙有几条高级道？
+  followup: 那富龙呢，中级道有几条？
+  expect_numbers:
+  - 16
+  - 6
+  expect_keywords: []
+  note: 同一轮内追问，编号不能乱
+- id: q116
+  kind: followup
+  resort: jiangjunshan
+  question: 将军山有几条高级道？
+  followup: 那将军山呢，中级道有几条？
+  expect_numbers:
+  - 15
+  - 18
+  expect_keywords: []
+  note: 同一轮内追问，编号不能乱
+- id: q117
+  kind: followup
+  resort: taiwu
+  question: 太舞有几条高级道？
+  followup: 那太舞呢，中级道有几条？
+  expect_numbers:
+  - 6
+  - 11
+  expect_keywords: []
+  note: 同一轮内追问，编号不能乱
+- id: q118
+  kind: followup
+  resort: wanlong
+  question: 万龙有几条高级道？
+  followup: 那万龙呢，中级道有几条？
+  expect_numbers:
+  - 19
+  - 9
+  expect_keywords: []
+  note: 同一轮内追问，编号不能乱
+- id: q119
+  kind: followup
+  resort: xueruyi
+  question: 雪如意有几条高级道？
+  followup: 那雪如意呢，中级道有几条？
+  expect_numbers:
+  - 4
+  - 12
+  expect_keywords: []
+  note: 同一轮内追问，编号不能乱
+- id: q120
+  kind: followup
+  resort: yinhe
+  question: 银河有几条高级道？
+  followup: 那银河呢，中级道有几条？
+  expect_numbers:
+  - 3
+  - 5
+  expect_keywords: []
+  note: 同一轮内追问，编号不能乱
+- id: q121
+  kind: followup
+  resort: yunding
+  question: 云顶有几条高级道？
+  followup: 那云顶呢，中级道有几条？
+  expect_numbers:
+  - 13
+  - 16
+  expect_keywords: []
+  note: 同一轮内追问，编号不能乱
+- id: q122
+  kind: followup
+  resort: fulong
+  question: 富龙有几条雪道？
+  followup: 那富龙雪票多少钱？
+  expect_numbers:
+  - 183
+  - 608
+  - 261
+  - 764
+  - 396
+  - 1235
+  - 473
+  - 1376
+  expect_keywords: []
+  note: 第二轮要能沿用上一轮编号而不被判成编造
+- id: q123
+  kind: followup
+  resort: silkroad
+  question: 丝绸之路有几条雪道？
+  followup: 那丝绸之路雪票多少钱？
+  expect_numbers:
+  - 149
+  - 169
+  - 189
+  - 209
+  - 289
+  - 329
+  - 189
+  - 209
+  expect_keywords: []
+  note: 第二轮要能沿用上一轮编号而不被判成编造
+- id: q124
+  kind: followup
+  resort: wanlong
+  question: 万龙有几条雪道？
+  followup: 那万龙雪票多少钱？
+  expect_numbers:
+  - 560
+  - 650
+  - 800
+  - 360
+  - 960
+  - 268
+  - 760
+  - 850
+  expect_keywords: []
+  note: 第二轮要能沿用上一轮编号而不被判成编造
+- id: q125
+  kind: followup
+  resort: yunding
+  question: 云顶有几条雪道？
+  followup: 那云顶雪票多少钱？
+  expect_numbers:
+  - 410
+  - 208
+  - 580
+  - 288
+  - 790
+  - 398
+  - 865
+  - 428
+  expect_keywords: []
+  note: 第二轮要能沿用上一轮编号而不被判成编造

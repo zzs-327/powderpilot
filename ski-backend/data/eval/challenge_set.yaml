@@ -1,0 +1,33 @@
+# 人工挑战题，不代表端到端引用或多轮记忆验收。
+- id: challenge:count_disagreement
+  question: 将军山到底61条还是48条雪道，为什么不一样
+  expect_any: [['将军山', '61', '48', '不一致']]
+  expected_resort: jiangjunshan
+- id: challenge:location_count
+  question: 万龙在哪里，一共有几条雪道
+  expect_any: [['万龙', '张家口'], ['万龙', '雪道总览']]
+  require_groups: [['张家口'], ['雪道总览']]
+  expected_resort: wanlong
+- id: challenge:price_count
+  question: 万龙有几条高级道，平日雪票多少钱
+  expect_any: [['万龙', '高级道 19 条'], ['万龙', '560']]
+  require_groups: [['高级道 19 条'], ['560']]
+  expected_resort: wanlong
+- id: challenge:deposit
+  question: 万龙租雪具押金多少钱，怎么退押金
+  expect_any: [['押金', '退']]
+  expected_resort: wanlong
+- id: challenge:park_count
+  question: 多乐美地为什么总数9条，分级只有7条
+  expect_any: [['多乐美地', '9', '7', '不一致']]
+  expected_resort: duolemeidi
+- id: challenge:unknown_price
+  kind: refusal
+  question: 南山滑雪场平日雪票多少钱
+- id: challenge:unknown_vs_known
+  kind: refusal
+  question: 二世谷和万龙哪个雪票更便宜
+- id: challenge:run_location
+  question: 万龙金龙道在哪里，有多长
+  expect_any: [['金龙道', '1900']]
+  expected_resort: wanlong

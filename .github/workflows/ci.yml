@@ -1,0 +1,80 @@
+# 持续集成（CI）
+#
+# 目的（对应开源治理与"可测试/可复现"）：
+#   每次 push/PR 自动跑测试与审查，任何人 clone 下来都能验证结论。
+#
+# ⚠️ 为什么 CI 里要起一个真 MySQL（而不是只跑"离线"用例）：
+#   中间件套件（scripts/test_middleware.py）用假模型驱动**真实 Agent 图**，
+#   工具会真的查库（get_resort_price → MySQL）。库不可用时它会报
+#   OperationalError: Access denied，看着像项目坏了，其实是环境没准备好。
+#   所以这里起 MySQL 服务 + 初始化数据，让这些断言真的跑起来。
+#
+#   反过来，本地没起 MySQL 时：pytest 会把依赖数据库的用例**跳过**（见 tests/conftest.py
+#   的 requires_db），不会误报成失败。
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  tests:
+    name: 测试与审查（MySQL + 离线用例）
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: ci-root
+          MYSQL_DATABASE: ski_db
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pci-root --silent"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    env:
+      DATABASE_URL: mysql+pymysql://root:ci-root@127.0.0.1:3306/ski_db?charset=utf8mb4
+      SECRET_KEY: ci-only-not-a-real-secret
+      ALLOW_ORIGINS: '*'
+      # 不装 Ollama：嵌入相关用例不在 CI 跑（检索评测需要嵌入模型，属于本地/部署环节）
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ski-backend/requirements.txt
+
+      - name: 建表 + 种子账号
+        working-directory: ski-backend
+        run: python init_db.py
+
+      - name: 雪场档案 → MySQL（工具查库需要真实数据）
+        working-directory: ski-backend
+        run: python -m scripts.sync_to_mysql
+
+      - name: pytest（接口契约 / 收录范围守卫 / 行程卡校验 / 离线套件）
+        working-directory: ski-backend
+        run: python -m pytest -q
+
+      - name: 数据可信度分级离线验证
+        working-directory: ski-backend
+        run: python -m scripts.test_provenance
+
+      - name: 流式事件协议离线验证
+        working-directory: ski-backend
+        run: python -m scripts.test_chat_stream
+
+      - name: 开源前审查（密钥 / 历史 / 内部文档 / 本机路径 / 依赖许可）
+        working-directory: ski-backend
+        run: python -m scripts.pre_open_source_check

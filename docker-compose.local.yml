@@ -1,0 +1,24 @@
+# 本地开发叠加文件：让容器里的后端用**宿主机上原生跑的 Ollama（吃到 GPU）**
+#
+# 用法（仓库根目录）：
+#   docker compose -f docker-compose.yml -f docker-compose.local.yml \
+#       --env-file .env.docker up -d --build
+#
+# 与 ECS 部署（只用 docker-compose.yml）的唯一区别：
+#   嵌入走宿主机 Ollama → 有 GPU 就快；ECS 上没有 GPU，只能在容器里跑 CPU 版。
+#
+# ── Windows 侧前置（不设这两步，容器一定连不上）────────────────────────
+#   1) 让 Ollama 监听所有网卡（默认只听 127.0.0.1，容器访问不到）：
+#        setx OLLAMA_HOST 0.0.0.0:11434        # 设置完要**重启 Ollama**
+#      验证：curl http://127.0.0.1:11434/api/tags 能返回模型列表
+#   2) Windows 防火墙放行 11434（仅本机 Docker 网段访问；别对公网开放）
+#
+# 注意：本文件里容器版 ollama 仍会启动但**不被使用**（depends_on 依赖它）。
+#       嫌占内存可以 `docker compose stop ollama`——后端连的是宿主机那个。
+services:
+  backend:
+    environment:
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+    extra_hosts:
+      # Linux 上 host.docker.internal 需要显式映射；Docker Desktop 自带
+      - "host.docker.internal:host-gateway"

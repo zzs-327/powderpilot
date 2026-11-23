@@ -1,0 +1,36 @@
+# 人工挑战集：小范围词面验收，不替代完整语义忠实度评测。
+# 期望复核依据为当前策展档案，非实时售价；保留原 e2e_set 和 last_e2e 基线。
+# --cases 默认报告为本文件同名 .md，也可显式传 --output。
+questions:
+  - id: challenge_wanlong_mixed
+    kind: price_mixed
+    question: 万龙滑雪场有多少条高级道？自带板平日全天门市雪票多少钱？请两项都回答并说明价格时效。
+    expect_groups:
+      - ['19', '十九']
+      - ['560', '五百六十']
+      - ['录入', '过期', '时效', '复核', '以官方', '最新']
+    reference: 'wanlong.yaml: runs_summary.advanced=19；prices 全天雪票·自带板·平日=560 元/人/天；勿与分时段优惠最低价混淆。'
+  - id: challenge_jiangjunshan_conflict
+    kind: source_conflict
+    question: 将军山雪道总数和分难度合计是否一致？请给出两种数字并说明可信度，不要直接断言唯一总数。
+    expect_groups:
+      - ['61', '六十一']
+      - ['48', '四十八']
+      - ['不一致', '对不上', '分歧', '冲突', '口径', '不下断言']
+      - ['第三方', '二手', '转引', '未获得官方', '未收录明细', '非官方']
+    reference: 'jiangjunshan.yaml: 百科/第三方称61条，第三方分级15+18+15=48；可能同源，未获得官方结构化数据，本库并列记录、不下断言。'
+  - id: challenge_uncollected
+    kind: refusal
+    question: 日本二世谷滑雪场的平日全天雪票多少钱？请仅根据本库资料回答。
+    expect_groups:
+      - ['未收录', '暂无', '没有收录', '没有相关', '无法', '不掌握', '不清楚', '查不到']
+    reference: '当前 data/resorts 无二世谷档案，不能拿邻近或已收录雪场价格补答。'
+  - id: challenge_wanlong_followup
+    kind: price_followup
+    question: 根据本库资料，万龙有多少条高级道？
+    followup: 那自带板平日全天门市雪票呢？请把刚才的高级道条数也一起列出，给出价格时效提醒。
+    expect_groups:
+      - ['19', '十九']
+      - ['560', '五百六十']
+      - ['录入', '过期', '时效', '复核', '以官方', '最新']
+    reference: '与首题相同；同一题两轮共享唯一thread，检验middleware有限回看窗口，不允许跨题复用。'

@@ -1,0 +1,117 @@
+# ============================================================
+# 雪场档案模板（单一真相源）
+# 用法：复制为 <resort_id>.yaml（如 wanlong.yaml），按字段填写。
+# 一个脚本从这个文件同时生成：MySQL 记录 + Chroma 文档 + 前端卡片。
+# 改数据只改这里，不要在数据库里手改——这是"策展工作量可控"的关键。
+#
+# ⚠️ 填写前先读这段：本项目的核心命题是"答案凭什么可信"，
+#    所以"来源"不是可有可无的备注，而是必填项。
+#    宁可标 transcribed，也不要为了让数据"看起来权威"而标 verified。
+# ============================================================
+
+id: wanlong                      # 英文 id，用于 metadata 过滤与图片路径
+name: 万龙滑雪场
+region: 河北崇礼
+aliases: [万龙, 万龙度假天堂]      # 用户可能说的简称/别称；不填也能靠去掉"滑雪场"后缀自动识别
+transport_hint: 北京北站乘京张高铁至太子城站约 1 小时   # 可选，配合地图 MCP 算行程
+
+# ---------------- 数据来源与可信度（必填） ----------------
+# data_status 三档，如实选择：
+#   verified    官方直采——数据直接来自官网/官方公众号/官方手册 PDF
+#   transcribed 二手转引——来自票务代理、百科、攻略站等，即使它自称转载自官方
+#   sample      示例占位——数字是编的，不得对外引用
+#
+# 注意 data_status 与每条数据的 source_type（A/B/C）是两个维度：
+#   source_type 说的是"这条信息本身是什么性质"，
+#   data_status 说的是"我们是怎么拿到它的"。
+#   一条官方雪道参数被二手页转引，source_type 仍是 A，但 data_status 只能是 transcribed。
+provenance:
+  data_status: transcribed
+  retrieved_at: '2026-09-11'        # 我们什么时候抄录的
+  retrieved_by: zzs
+  method: 第三方票务聚合页转引
+  primary_source: 页面标题或资料名（要具体到能被人复核）
+  primary_url: https://example.com/xxx
+  stated_source: 该页面自己标注的原始出处
+  caveat: 为什么够不到 verified；来源之间有冲突也写在这里
+
+# 各类数据的默认出处（单条可用 source / source_type / date 覆盖）
+# 转引时 source 必须写成"转引自 X（原注来源：Y）"，不要只写"官方资料"
+source_defaults:
+  overview: { source_type: A, source: '转引自 XXX（原注来源：YYY）', date: '2026-09-11' }
+  run:      { source_type: A, source: '转引自 XXX（原注来源：YYY）', date: '2026-09-11' }
+  lift:     { source_type: A, source: '转引自 XXX（原注来源：YYY）', date: '2026-09-11' }
+  price:    { source_type: A, source: '转引自 XXX（原注来源：官方价目表）', date: '2026-09-11' }
+
+# ---------------- A 级：来源登记 ----------------
+official:
+  handbook: ''                     # MinIO object_key 或本地路径；没有就留空
+  handbook_page: null              # 便于溯源到具体页码
+  price_updated_at: '2026-04-06'   # 价格有效期最后一天（保鲜期起点）
+  website: ''                      # 官网地址；失效/被抢注就留空并在 caveat 说明
+  source_note: 二手转引，未经官网直采
+
+# ---------------- 雪道（结构化，供 SQL 统计"有几条高级道"） ----------------
+# 字段口径：坡度与海拔是官方雪道参数表的常见口径，比落差更能回答"陡不陡"。
+# 源没给的字段就留空，不要用"看起来差不多"的值填。
+runs:
+  - name: 金龙道
+    difficulty: 高级                # 只能填 初级 / 中级 / 高级
+    length_m: 1900
+    top_altitude_m: 2109            # 最高海拔（米）
+    vertical_m: null                # 落差（米）；源通常只给其中一种
+    avg_slope_deg: 18               # 平均坡度（度）
+    max_slope_deg: 26               # 最大坡度（度）
+    note: 长陡坡，下半段较窄
+# 官方公布的雪道总数（按难度）。源之间口径冲突时**不要填**——
+# 不写总数，Agent 就只会说"本库已收录明细 N 条"，这比编一个数字诚实。
+runs_summary: { beginner: 4, intermediate: 9, advanced: 19 }
+
+# ---------------- 索道 / 缆车 / 魔毯（只进 RAG，不建表） ----------------
+# 回答的是"排队久不久、运力够不够"这类体验问题
+lifts:
+  - { name: 1索, category: 索道, spec: 脱挂式 8 人吊箱, length_m: 1600, capacity_per_hour: 2200, serves: 高中初级道 }
+  - { name: 卧龙道魔毯, category: 魔毯, length_m: 285, capacity_per_hour: 1000, serves: 初级道 }
+
+# ---------------- 价格（结构化 + 录入日期，供保鲜期检查） ----------------
+# 只录"门市价/标准价"这类跨时段稳定的口径；浮动优惠价录进来很快过期且容易误导。
+# 拿不到可转录的文字版价目表，就留空 prices: []，不要猜。
+prices:
+  - { item: 全天雪票·自带板·平日, price: 560, unit: 人/天, updated_at: '2026-04-06' }
+  - { item: 雪具租赁（鞋板杖头盔）·1天·平日周末, price: 200, unit: 人/天 }
+
+# ---------------- 分层经验（C 级） ----------------
+by_level:
+  beginner:
+    summary: 初级道占比高，适合第一次上雪
+    tips: ['租赁区上午排队少', '别直接上中级道']
+  intermediate:
+    summary: 中级道梯度合理，适合练换刃
+    tips: ['下午雪面较硬，注意卡冰']
+  advanced:
+    summary: 高级道密度大，适合卡宾与粉雪
+    tips: ['大风天山顶缆车可能停运']
+
+# ---------------- 避坑（必须注明出处，不能写"网上说"） ----------------
+tips:
+  - { text: '周末上午 9-11 点租赁区排队最长，建议提前一天取板', source: '本人 2026-01 实测', source_type: C, date: '2026-01-12' }
+  # 转引来的官方规则也要标 A + 写清转引出处
+  - { text: '日场缆车运行 8:30-16:30，夜场 18:30-21:30', source: '转引自 XXX（原注来源：官方价目表）', source_type: A, date: '2026-04-06' }
+
+# ---------------- 教学视频卡（C 级） ----------------
+videos:
+  - title: 单板换刃入门
+    level: beginner
+    board: 单板                   # 单板 / 双板
+    duration: '8:20'
+    key_points: ['01:20 站姿', '03:40 推坡', '05:10 换刃']
+    url: ''                       # 没链接就留空，别放 example.com 占位
+
+# ---------------- 实拍图（B 级） ----------------
+photos:
+  - { key: ski-photos/wanlong/20260112-top.jpg, shot_at: '2026-01-12', location: 山顶, credit: 本人, license: 已授权 }
+
+meta:
+  last_reviewed_at: '2026-09-11'
+  curator: zzs
+  data_status: transcribed        # 与 provenance.data_status 保持一致

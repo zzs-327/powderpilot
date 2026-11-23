@@ -1,0 +1,47 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": { "navigationBarTitleText": "滑雪情报官" }
+		},
+		{
+			"path": "pages/trip/trip",
+			"style": { "navigationBarTitleText": "我的行程" }
+		},
+		{
+			"path": "pages/resorts/resorts",
+			"style": { "navigationBarTitleText": "雪场库" }
+		},
+		{
+			"path": "pages/graph/graph",
+			"style": { "navigationBarTitleText": "三维雪场" }
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": { "navigationBarTitleText": "我的画像" }
+		},
+		{
+			"path": "pages/login/login",
+			"style": { "navigationBarTitleText": "登录" }
+		}
+	],
+	"tabBar": {
+		"color": "#8a94a6",
+		"selectedColor": "#1f6feb",
+		"backgroundColor": "#ffffff",
+		"borderStyle": "black",
+		"list": [
+			{ "pagePath": "pages/index/index", "text": "对话" },
+			{ "pagePath": "pages/resorts/resorts", "text": "雪场库" },
+			{ "pagePath": "pages/graph/graph", "text": "三维雪场" },
+			{ "pagePath": "pages/trip/trip", "text": "行程" },
+			{ "pagePath": "pages/profile/profile", "text": "我的" }
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "PowderPilot",
+		"navigationBarBackgroundColor": "#0f2a4a",
+		"backgroundColor": "#f4f7fb"
+	}
+}

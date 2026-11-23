@@ -1,0 +1,39 @@
+# 本文件是作者自写的虚构示例，仅用于演示档案结构与入库流程。
+# 地名、雪道、价格均为编造。data_status 为 sample，不得当作真实雪场资料对外引用。
+id: example_snowvale
+name_zh: 示例谷雪场（虚构）
+name_en: Example Snowvale (Fictional)
+region: 示例省 / 示例市
+data_status: sample
+source_type: C 经验
+stated_source: 作者自写示例，无对应真实雪场
+primary_url: ""
+notes: |
+  这是公开仓库附带的最小示例档案，用来说明 YAML 字段怎么写、如何同步到 MySQL 与向量库。
+  完整评测集（golden_set.yaml 等）是针对作者本地策展的真实雪场档案编写的，
+  那些档案因第三方转引版权未随本快照提供。要用 62 条检索/拒答用例复现历史报告，
+  请自行准备并标注来源的雪场档案后再运行评测。
+
+stats:
+  trail_count: 6
+  beginner_trails: 3
+  intermediate_trails: 2
+  advanced_trails: 1
+
+trails:
+  - name: 练习道（虚构）
+    level: 初级
+    data_status: sample
+  - name: 林间道（虚构）
+    level: 中级
+    data_status: sample
+  - name: 山脊道（虚构）
+    level: 高级
+    data_status: sample
+
+pricing:
+  - item: 日场成人票（示例占位）
+    amount: 0
+    currency: CNY
+    data_status: sample
+    note: 数字是占位，不是真实票价

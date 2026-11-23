@@ -1,0 +1,49 @@
+# ============================================================
+# PowderPilot 滑雪情报官 后端依赖
+#
+# 安装（任选其一）：
+#   A. 复用已装好的课程环境（推荐，什么都不用装）：
+#      PyCharm → Settings → Project → Python Interpreter → Add Interpreter
+#      → Conda → 选 <你的 conda 环境路径>
+#   B. 新建虚拟环境后一条命令装完：
+#      pip install -r requirements.txt
+# ============================================================
+
+# ---------- Web / 基础 ----------
+fastapi>=0.115
+uvicorn[standard]>=0.30          # ASGI 服务器
+alembic>=1.13,<2                 # 数据库迁移
+sqlalchemy>=2.0                  # ORM
+pymysql>=1.1                     # MySQL 驱动（DATABASE_URL 里的 mysql+pymysql）
+cryptography>=42                 # MySQL8 caching_sha2_password 认证需要它
+pydantic>=2.7
+pydantic-settings>=2.4           # 读 .env
+python-jose[cryptography]>=3.3   # JWT
+bcrypt>=4.0                      # 密码哈希
+PyYAML>=6.0                      # 读 data/resorts/*.yaml（雪场档案）
+
+# ---------- Agent ----------
+langchain>=0.3                   # create_agent
+langchain-openai>=0.2            # 智谱/DeepSeek 走 OpenAI 兼容接口
+langgraph>=0.2                   # 状态机 / checkpointer
+langgraph-checkpoint-sqlite>=2.0 # 会话记忆的异步 SQLite checkpointer（langgraph 本体不带它）
+aiosqlite>=0.20                  # 上面那个包的异步驱动；缺它 achat 会 ModuleNotFoundError
+langchain-text-splitters>=0.3    # 中文分块
+
+# ---------- RAG ----------
+langchain-ollama>=0.2            # Ollama 本地嵌入
+langchain-chroma>=0.2            # Chroma 向量库
+langchain-community>=0.3         # 文档加载器
+chromadb>=0.5
+rank-bm25>=0.2.2                 # BM25 关键词召回（混合检索另一路）
+
+# ---------- 测试 / 可选 ----------
+pytest>=8.0                      # tests/ 用例（接口契约 / 收录范围守卫 / 离线套件）
+httpx>=0.27                      # FastAPI TestClient 用
+python-dotenv>=1.0
+
+# ---------- 可选加分项（**不在这里**，见 requirements-optional.txt） ----------
+# ⚠️ pymupdf（PDF 手册解析）是 **AGPL-3.0 双许可**：放进核心依赖会污染整个项目的
+#    许可合规性（AGPL 对网络服务也要开放源码），而当前语料全是 YAML，主流程用不到它。
+#    连同 minio / fastmcp / langchain-mcp-adapters 一起挪到可选文件：
+#        pip install -r requirements-optional.txt

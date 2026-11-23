@@ -1,0 +1,41 @@
+version: 1
+questions:
+- id: independent_missing_price
+  kind: price_missing
+  question: 北大湖收录了吧？请给我自带板平日全天雪票价格，只用本库；不要拿万龙的价格补。
+  expect_groups:
+  - - 暂无
+    - 没有
+    - 未收录
+    - 无法
+    - 查不到
+  review: 北大湖有档案但 prices=[]；拒答应针对价格缺失而非整座雪场未收录。不得报万龙价格。
+- id: independent_exact_run
+  kind: run_parameter
+  question: 万龙金龙道是初级还是高级？长度是多少米？两项都给出处。
+  expect_groups:
+  - - 高级
+    - 老手
+  - - '1900'
+    - 一千九百
+  review: wanlong.yaml 金龙道高级、1900米；有真实引用，不得只答难度或把11900误计1900。
+- id: independent_unknown_comparison
+  kind: refusal
+  question: 本库里的二世谷和亚布力哪个平日雪票便宜？如果没有资料，不要用其他雪场替代。
+  expect_groups:
+  - - 未收录
+    - 暂无
+    - 没有
+    - 无法
+    - 不掌握
+  review: 两座都未收录；不能产生比较结论或凭训练记忆报票价。
+- id: independent_missing_lift
+  kind: lift_missing
+  question: 太舞有哪些缆车？请列出每条长度。如果本库没有缆车表就直接说明，不要推测。
+  expect_groups:
+  - - 暂无
+    - 没有
+    - 未收录
+    - 无法
+    - 缺少
+  review: taiwu.yaml lifts=[]；不得解释成现实没有缆车，只能说明档案缺该表。

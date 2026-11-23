@@ -1,0 +1,146 @@
+# PowderPilot 一键起（MySQL + Ollama + 后端）
+#
+# 用法：
+#   cp .env.docker.example .env.docker     # 填 3 个值
+#   docker compose --env-file .env.docker up -d --build
+#   bash deploy/init.sh                    # 建表 + 同步档案 + 拉嵌入模型 + 自检
+#   打开 http://<服务器IP>:8000/docs
+#
+# 本文件按「小内存服务器」调过参（实测对象：阿里云 ECS 2 核 / 3.6G 内存 / 4G swap）：
+#   - MySQL 收着用（默认 buffer pool 1.25G，这里 128M）
+#   - Ollama 只加载 1 个模型、串行处理、空闲 5 分钟卸载（把内存还回去）
+#   - 每个服务都设了内存上限，避免互相挤爆触发 OOM Killer
+#   - **向量库改成绑定挂载**：本机用 GPU 灌好库（3.7MB）直接上传即可，
+#     ECS 不必再跑一遍 CPU 嵌入（那一步又慢又吃内存）
+#
+# 安全默认（公网 ECS 上尤其重要）：
+#   MySQL 3306 与 Ollama 11434 **只绑 127.0.0.1**，不对外暴露；
+#   只有后端 8000 对外。要么用安全组限制来源 IP，要么前面再挂一层 Nginx + HTTPS。
+
+name: powderpilot
+
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?请在 .env.docker 里设置 MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ski_db
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+      # ↓ 小内存机器的关键：默认配置会和 Ollama 抢内存
+      - --innodb-buffer-pool-size=128M
+      - --performance-schema=OFF
+      - --max-connections=50
+    mem_limit: 800m
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      # 用 mysqladmin ping 判活：后端 depends_on 会等它健康再起
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    # 刻意**不发布宿主端口**：后端在 compose 网络里用服务名直连 mysql，
+    # 发布出去只会（1）和服务器上已有的 MySQL 抢 3306（2）多一个暴露面。
+    # 需要手动连库调试时：docker compose exec mysql mysql -uroot -p
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    environment:
+      # 只加载一个模型 + 串行：小机器上"并发"只会互相拖死
+      OLLAMA_MAX_LOADED_MODELS: "1"
+      OLLAMA_NUM_PARALLEL: "1"
+      # 空闲 5 分钟卸载模型，把内存还给 MySQL/后端；下次查询会自动重新加载
+      OLLAMA_KEEP_ALIVE: 5m
+    mem_limit: 1000m
+    volumes:
+      - ollama_models:/root/.ollama
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    # 同样不发布端口：后端用 http://ollama:11434 访问，宿主端口没必要开。
+    # 想手动调 Ollama：docker compose exec ollama ollama list
+
+  backend:
+    build:
+      context: ./ski-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    environment:
+      # ---- 基础设施（服务名即主机名）----
+      DATABASE_URL: mysql+pymysql://root:${MYSQL_ROOT_PASSWORD}@mysql:3306/ski_db?charset=utf8mb4
+      OLLAMA_BASE_URL: http://ollama:11434
+      # 会话记忆写到挂卷目录，容器重建不丢（默认落在 /app 根目录会被镜像层覆盖）
+      CHECKPOINT_DB: /app/state/checkpoints.db
+      # ---- 嵌入：默认本地 Ollama；有托管额度时可切成 OpenAI 兼容接口 ----
+      # 例（阿里云百炼）：EMBED_PROVIDER=openai / EMBED_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+      #                   EMBED_MODEL=text-embedding-v4 / EMBED_API_KEY=sk-xxx
+      EMBED_PROVIDER: ${EMBED_PROVIDER:-ollama}
+      EMBED_API_KEY: ${EMBED_API_KEY:-}
+      EMBED_BASE_URL: ${EMBED_BASE_URL:-}
+      EMBED_MODEL: ${EMBED_MODEL:-}
+      # ---- 密钥与模型（全部从 .env.docker 注入，不写进镜像）----
+      SECRET_KEY: ${SECRET_KEY:?请在 .env.docker 里设置 SECRET_KEY}
+      LLM_PROVIDER: ${LLM_PROVIDER:-zhipu}
+      ZHIPU_API_KEY: ${ZHIPU_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-glm-4.5-air}
+      # glm-5.3-flash 始终思考、不支持关闭，用它会 400，见 config.py 注释
+      LLM_THINKING: ${LLM_THINKING:-disabled}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      # ---- 运行模式 ----
+      DEBUG: "False"
+      APP_HOST: 0.0.0.0
+      APP_PORT: "8000"
+      # 部署必须列白名单，不能留 *（前端域名，逗号分隔）
+      ALLOW_ORIGINS: ${ALLOW_ORIGINS:-*}
+      USE_MIDDLEWARE: "True"
+      USE_STRUCTURED_OUTPUT: "True"
+    mem_limit: 700m
+    volumes:
+      # 向量库：绑定挂载 → 本机 GPU 灌好（3.7MB）上传即可，ECS 不必再跑嵌入入库
+      - ./ski-backend/chroma:/app/chroma
+      - app_state:/app/state             # 会话记忆 checkpoints.db
+      - ./ski-backend/logs:/app/logs     # 日志落宿主机，方便 tail
+      - ./ski-backend/data:/app/data:ro  # 雪场档案只读：容器里不改数据（改 YAML 在宿主机改）
+    ports:
+      # ⚠️ 若服务器上 8000 已被别的服务占用（例如课程项目留下的容器），
+      #    这里换成 "8080:8000" 即可，容器内部不变。
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/', timeout=3)\""]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  # ---- H5 前端（可选，用 profile 控制：默认不启动）----
+  # 为什么要 profile：前端得先在 HBuilderX 里「发行 → 网站-H5手机版」构建出产物，
+  # 没有产物时挂载目录是空的，nginx 只会给 404——把它设成默认不启动，
+  # 就绪后再显式打开：
+  #   docker compose --env-file .env.docker --profile web up -d
+  web:
+    image: nginx:alpine
+    profiles: ["web"]
+    restart: unless-stopped
+    depends_on:
+      - backend
+    volumes:
+      # HBuilderX 的构建产物（本地构建后上传到服务器这个路径）
+      - ./ski-backend/ski-front/unpackage/dist/build/h5:/usr/share/nginx/html:ro
+      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+
+volumes:
+  mysql_data:
+  ollama_models:
+  app_state:

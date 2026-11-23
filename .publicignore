@@ -1,0 +1,65 @@
+# 公开快照导出规则（private → public）
+#
+# 用途：私有仓库里正常开发（含内部记忆、个人文档、试错记录），
+#       scripts/export_public.py 按本文件把「可公开的部分」导出成一个干净快照，
+#       再推到 Gitee（报名/主入口）与 GitHub（镜像）。
+#
+# 语法（前缀匹配，`/` 结尾表示目录；`!` 开头=显式包含）：
+#   exclude <路径>     不导出
+#   sanitize <模式>    导出但替换掉（本机路径、账号等）
+# 未匹配任何规则的文件**默认导出**（所以 exclude 才是需要维护的部分）。
+
+# ── 1. 永不导出：私有开发记忆 ──
+exclude /private/
+exclude /.workbuddy/
+exclude /交接说明-给新会话.md
+exclude /AGENTS.private.md
+
+# ── 2. 永不导出：个人/策略文档 ──
+exclude /秋招冲刺计划-27届-2026年10月.md
+exclude /滑雪情报官-计划书评审与完善建议.md
+
+# ── 3. 永不导出：运行期产物与密钥（与 .gitignore 互为兜底）──
+exclude /ski-backend/.env
+exclude /ski-backend/chroma/
+exclude /ski-backend/logs/
+exclude /ski-backend/checkpoints.db
+exclude /ski-backend/checkpoints.db-shm
+exclude /ski-backend/checkpoints.db-wal
+exclude /ski-backend/probe_tmp/
+exclude /ski-backend/data/photos/
+exclude /ski-backend/__pycache__/
+exclude /ski-backend/.idea/
+
+# ── 4. 永不导出：排障产物与上一次的导出结果 ──
+exclude /*.png
+exclude /*.npy
+exclude /seg.json
+exclude /.public-export/
+
+# ── 4b. 不导出：课程/学习笔记 ──
+# 为什么排除 docs/MCP.md（2026-10-04 定）：它是**课程笔记**（MCP 协议学习记录），
+# 不是项目文档。公开仓库的 docs/ 只放项目自己的东西（踩坑记录、演示脚本）；
+# 混进课程笔记会稀释"这是一个项目"的观感——评审看的是项目，不是学习痕迹。
+exclude /docs/MCP.md
+
+# ── 5. 导出但脱敏：本机绝对路径与账号 ──
+# 说明：**这是机器读的规则**，scripts/export_public.py 按它执行替换。
+#       语法：sanitize <正则> => <替换文本>
+sanitize C:\\Users\\[^\\\s"']+ => <本地路径>
+sanitize [A-Za-z]:[/\\]conda3_envs[/\\]zzss => <你的 Python 环境>
+sanitize [A-Za-z]:[/\\]ollama[^\s"']* => <你的 Ollama 路径>
+sanitize 2170799561@qq\.com => <你的公开邮箱>
+# 注意：**不要**把账号名（zzs_s / zzs-327）也脱敏——它本来就会出现在仓库 URL 里，
+# 而治理文档里 @维护者 需要真实可点的账号，脱敏后反而读不通。
+
+# ── 6. 显式包含：核心资产（防止将来新增文件被误排除）──
+# 注意：与上面的 exclude 冲突时**以 exclude 为准**（安全优先）
+include /LICENSE
+include /DATA_LICENSE.md
+include /README.md
+include /AGENTS.md
+include /deploy/
+include /docker-compose.yml
+include /docker-compose.local.yml
+include /ski-backend/**

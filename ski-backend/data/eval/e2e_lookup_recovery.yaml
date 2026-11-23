@@ -1,0 +1,21 @@
+# 漏调工具与简短雪场输入的真实模型冒烟；确定性失败路径见 scripts/test_middleware.py。
+questions:
+  - id: lookup_bare_beidahu
+    kind: resort_intro
+    question: 北大湖
+    expect_groups:
+      - ['吉林市']
+    reference: 'beidahu.yaml: region=吉林市（吉林省）；裸雪场名应给出有来源的基本介绍。'
+  - id: lookup_beidahu_location
+    kind: resort_location
+    question: 北大湖在哪？
+    expect_groups:
+      - ['吉林市']
+    reference: 'beidahu.yaml: region=吉林市（吉林省），不能回答长春市或日本。'
+  - id: lookup_resort_switch
+    kind: resort_location
+    question: 北大湖在哪？
+    followup: 太舞在哪？
+    expect_groups:
+      - ['崇礼']
+    reference: 'taiwu.yaml: 张家口崇礼；本轮换场须查询太舞。'

@@ -1,0 +1,32 @@
+# 换行符策略（跨平台协作必须显式声明，否则会真的出事）
+#
+# 为什么需要：
+#   Windows 上 git 默认 autocrlf=true 会把文件检出成 CRLF。
+#   而 **shell 脚本在 Linux 上被检出成 CRLF 会直接失败**：
+#       bash: ./deploy/init.sh: /bin/bash^M: bad interpreter
+#   所以 *.sh 必须锁死 LF；反过来 *.ps1 在 Windows 上要 CRLF 才顺手。
+#   Python 源码锁 LF：容器里（Linux）不会有 ^M 混进字符串。
+* text=auto eol=lf
+
+*.sh      text eol=lf
+*.py      text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+*.md      text eol=lf
+*.json    text eol=lf
+*.txt     text eol=lf
+Dockerfile text eol=lf
+
+*.ps1     text eol=crlf
+*.bat     text eol=crlf
+*.cmd     text eol=crlf
+
+# 二进制：别做任何转换
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.webp    binary
+*.gif     binary
+*.pdf     binary
+*.npy     binary
+*.db      binary

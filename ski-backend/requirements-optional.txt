@@ -1,0 +1,22 @@
+# ============================================================
+# PowderPilot 滑雪情报官 —— **可选**依赖
+#
+# 为什么单独一个文件（这是许可合规决定，不是整理癖）：
+#   pymupdf（PyMuPDF）是 **AGPL-3.0 双许可**（GNU AFFERO GPL 3.0 或 Artifex 商业许可）。
+#   AGPL 传染性强：只要作为网络服务提供，就要求向使用者开放源码，企业法务通常直接亮红灯。
+#   本项目核心流程只读 YAML 档案，**用不到 PDF 解析**（仓库里一个 .pdf 都没有），
+#   所以把它挪出核心依赖——核心依赖因此干净为 MIT / Apache-2.0 / BSD。
+#
+# 装法：
+#   pip install -r requirements-optional.txt
+# ============================================================
+
+# PDF 手册解析（rag/parser.py 的 parse_pdf 用；AGPL-3.0，商用需自行评估/购买商业许可）
+pymupdf>=1.24                    # import 名是 fitz
+
+# 实拍图对象存储（远景：data/photos 原图不入 git，改存 MinIO）
+minio>=7.2
+
+# 外部工具接入（远景：地图 MCP / 自研 MCP 服务）
+langchain-mcp-adapters>=0.1      # 百度地图 MCP
+fastmcp>=2.0                     # 自研 MCP 服务

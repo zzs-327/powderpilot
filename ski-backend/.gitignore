@@ -1,0 +1,33 @@
+.idea
+.vscode
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 密钥：绝对不能进仓库
+.env
+
+# 运行期产物
+chroma/
+checkpoints.db
+*.db
+*.sqlite3
+
+# chroma 探针的临时库（scripts/probe_chroma.py 每次自建自清）
+probe_tmp/
+
+# 运行日志（诊断留痕：引用校验的打回原因都在这，不入库）
+logs/
+
+# 本机工具与诊断的临时目录（原先只写在 .git/info/exclude 里，换机器就会变成未跟踪文件）
+.test-deps/
+.permission-recovery/
+.uv-cache/
+_ptmp_pytest/
+
+# 实拍图原图不入库（只提交元数据），避免仓库体积爆炸
+data/photos/*
+!data/photos/.gitkeep
+
+.DS_Store
