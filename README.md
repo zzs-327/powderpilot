@@ -17,8 +17,7 @@
 
 - 做扎实四件事：**行程卡、具体雪场资料、可溯源图片、推荐教学视频**；图片和视频的可用程度以实际素材核验为准。
 - 目的地采用 **20 个规划池、首批 12 个**，覆盖日本、东北、新疆、崇礼、中部、欧洲等，名单与验收见 [ROADMAP.md](ROADMAP.md)。规划数量不等于已收录数量，也不等于本仓库已附带的档案数量。
-- 既有软件主线聚焦雪场选择与行程辅助；不承诺最低价、实时雪况或自动动作诊断。
-- 独立硬件竞赛扩展见 [可穿戴运动记录技术方案](docs/SPORTS_HARDWARE_MVP.md)：ESP32 + IMU、实时姿态、记录报告与 AI 问答，当前为设计方案，尚未实现或实机验收。
+- 既有软件主线聚焦雪场选择与行程辅助；不承诺最低价、实时雪况或自动动作诊断。独立硬件竞赛扩展是未实现提案，见 [docs/proposals/SPORTS_HARDWARE_MVP.md](docs/proposals/SPORTS_HARDWARE_MVP.md)，不列入本页近期产品重点。
 
 ---
 
@@ -97,12 +96,13 @@ cp .env.example .env          # 填入你自己的 API 密钥、数据库连接�
 python init_db.py             # 建表。演示账号不会使用仓库内置口令，需自设环境变量后才会创建
 python -m scripts.sync_to_mysql   # 将 resorts/ 档案写入 MySQL（先放入你有权使用的档案或自带示例）
 python -m scripts.export_graph    # 为交互入口生成当前档案的图谱
-python -m rag.ingest          # 写入向量库（需先启动 Ollama 并 pull 嵌入模型）
+python -m rag.ingest --dry-run   # 只解析体检，不调用嵌入模型
+python -m rag.ingest             # 写入向量库（需先启动 Ollama 并 pull 嵌入模型）
 
 python -m scripts.check_env   # 环境自检
 python -m pytest -rs          # 自动化测试，显示本地数据缺失的跳过原因
 python -m scripts.chat_cli --debug
-python main.py                # http://127.0.0.1:8000/docs
+python main.py                # 文档 http://127.0.0.1:8000/docs ；健康检查 http://127.0.0.1:8000/
 ```
 
 前端：用 HBuilderX 打开 `ski-backend/ski-front`，再运行到浏览器。
@@ -114,16 +114,18 @@ python main.py                # http://127.0.0.1:8000/docs
 | 文档 | 看它是为了 |
 |---|---|
 | [docs/CURRENT_STATUS.md](docs/CURRENT_STATUS.md) | 核对日期、模型默认值、历史报告及未验收边界 |
+| [docs/DEMO.md](docs/DEMO.md) | 演示入口与从历史 P0 计划摘出的验收条件 |
+| [docs/backend-workflow.md](docs/backend-workflow.md) | 后端数据流、dry-run 与检索调试 |
 | [AGENTS.md](AGENTS.md) | 协作者必读：命令、目录职责、约定、已知坑 |
 | [ROADMAP.md](ROADMAP.md) | 接下来做什么，每条都带可量化判据 |
-| [docs/SPORTS_HARDWARE_MVP.md](docs/SPORTS_HARDWARE_MVP.md) | 24 小时硬件黑客松方案（设计文档，尚未实现或实机验收） |
+| [docs/proposals/SPORTS_HARDWARE_MVP.md](docs/proposals/SPORTS_HARDWARE_MVP.md) | 未实现的可穿戴硬件提案，非当前软件主线 |
 | [docs/DATABASE_MIGRATIONS.md](docs/DATABASE_MIGRATIONS.md) | Alembic 新库初始化、旧库结构核对与接管边界 |
-| [docs/SHORT_DELIVERY.md](docs/SHORT_DELIVERY.md) | 短交付与工程验证边界 |
+| [docs/archive/SHORT_DELIVERY.md](docs/archive/SHORT_DELIVERY.md) | 已归档的短交付清单与历史本机测试记录 |
 | [docs/MEDIA_COLLECTION.md](docs/MEDIA_COLLECTION.md) | 图片/教学视频来源授权与接入规则 |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | 数据贡献门槛、门禁、提交规范 |
 | [GOVERNANCE.md](GOVERNANCE.md) | 决策流程、发布规则、数据治理 |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | 踩坑记录与设计决策 |
-| [docs/demo-script.md](docs/demo-script.md) | 演示脚本 |
+| [docs/demo-script.md](docs/demo-script.md) | 详细演示脚本 |
 | [docs/GUIDANCE_AND_TERRAIN.md](docs/GUIDANCE_AND_TERRAIN.md) | 情境追问、教学资源空态与三维场景边界 |
 | [SECURITY.md](SECURITY.md) / [CHANGELOG.md](CHANGELOG.md) | 安全上报渠道 / 版本记录 |
 | [DATA_LICENSE.md](DATA_LICENSE.md) | 数据授权（**代码开源 ≠ 数据开源**） |

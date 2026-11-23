@@ -92,7 +92,7 @@ Copy-Item .env.example .env
 ## AI Collaboration Notes
 
 - **入口文档只有这几份**：根 `README.md`（含「文档地图」）、`AGENTS.md`、`ROADMAP.md`、
-  `CONTRIBUTING.md`、`GOVERNANCE.md`、`SECURITY.md`、`CHANGELOG.md`、`ski-backend/README.md`、
+  `CONTRIBUTING.md`、`GOVERNANCE.md`、`SECURITY.md`、`CHANGELOG.md`、`ski-backend/README.md`（启动以根 README 为准；长稿见 `docs/archive/ski-backend-README.md`）、
   `docs/TROUBLESHOOTING.md`。不要去找"项目计划书 / 评审建议 / 复盘 / 差异对照"——
   它们已归档到 `private/archive/`，**是历史材料，不是当前依据**。
 - `private/` 目录（交接说明、归档文档、排障产物、AI 记忆）**公开侧永不导出、默认不读**；
