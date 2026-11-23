@@ -111,10 +111,20 @@ python main.py                # 文档 http://127.0.0.1:8000/docs ；健康检�
 
 ## 文档地图
 
+先看这四项。没有单独的架构文档，架构入口指向本页已有的「技术栈」和「目录」章节，不另造文件。数据许可与公开快照边界仍写在本页正文，不因索引折叠而取消。
+
 | 文档 | 看它是为了 |
 |---|---|
-| [docs/CURRENT_STATUS.md](docs/CURRENT_STATUS.md) | 核对日期、模型默认值、历史报告及未验收边界 |
+| [本 README](README.md) | 本页：产品说明、公开快照边界、评测口径与启动 |
 | [docs/DEMO.md](docs/DEMO.md) | 演示入口与从历史 P0 计划摘出的验收条件 |
+| [本页「技术栈」](#技术栈)与[「目录」](#目录) | 技术栈与仓库目录结构 |
+| [docs/CURRENT_STATUS.md](docs/CURRENT_STATUS.md) | 核对日期、模型默认值、历史报告及未验收边界 |
+
+<details>
+<summary>完整文档索引</summary>
+
+| 文档 | 看它是为了 |
+|---|---|
 | [docs/backend-workflow.md](docs/backend-workflow.md) | 后端数据流、dry-run 与检索调试 |
 | [AGENTS.md](AGENTS.md) | 协作者必读：命令、目录职责、约定、已知坑 |
 | [ROADMAP.md](ROADMAP.md) | 接下来做什么，每条都带可量化判据 |
@@ -126,10 +136,13 @@ python main.py                # 文档 http://127.0.0.1:8000/docs ；健康检�
 | [GOVERNANCE.md](GOVERNANCE.md) | 决策流程、发布规则、数据治理 |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | 踩坑记录与设计决策 |
 | [docs/demo-script.md](docs/demo-script.md) | 详细演示脚本 |
-| [docs/GUIDANCE_AND_TERRAIN.md](docs/GUIDANCE_AND_TERRAIN.md) | 情境追问、教学资源空态与三维场景边界 |
-| [SECURITY.md](SECURITY.md) / [CHANGELOG.md](CHANGELOG.md) | 安全上报渠道 / 版本记录 |
+| [docs/GUIDANCE_AND_TERRAIN.md](docs/GUIDANCE_AND_TERRAIN.md) | 滑雪需求澄清、教学资源空态与三维展示边界（产品功能说明，不是面试追问） |
+| [SECURITY.md](SECURITY.md) | 安全上报渠道 |
+| [CHANGELOG.md](CHANGELOG.md) | 版本记录 |
 | [DATA_LICENSE.md](DATA_LICENSE.md) | 数据授权（**代码开源 ≠ 数据开源**） |
 | [DEPENDENCIES.md](DEPENDENCIES.md) | 依赖许可清单 |
+
+</details>
 
 ## 许可
 
