@@ -5,7 +5,11 @@
 合计 2400 与明细之和对不上——**正是"看着有来源、数字没依据"的那种卡**。
 它现在是回归用例：这类卡必须被拦下来。
 """
+import pytest
+
 from agent.card_check import check_card
+
+pytestmark = pytest.mark.usefixtures("test_registry")
 
 # 本轮工具返回（真实形状：带编号、来源、日期、可信度标记）
 EVIDENCE = (

@@ -131,7 +131,10 @@ def test_mysql_offline_has_no_url_or_connection(migration_config, monkeypatch):
 
     config, _, _ = migration_config
     secret = "offline-secret%25-never-print"
-    url = f"mysql+pymysql://offline-user:{secret}@invalid.invalid/test_schema"
+    url = sa.engine.URL.create(
+        "mysql+pymysql", username="offline-user", password=secret,
+        host="invalid.invalid", database="test_schema",
+    ).render_as_string(hide_password=False)
     monkeypatch.setattr(settings, "DATABASE_URL", url)
     # ini URL 不应该成为连接配置入口。
     config.set_main_option("sqlalchemy.url", "ignored://wrong")

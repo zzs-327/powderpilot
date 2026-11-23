@@ -1,6 +1,9 @@
+import pytest
+
 from scripts import resort_scorecard as sc
 
 
+@pytest.mark.local_data('resorts/beidahu.yaml')
 def test_benchmark_resort_meets_every_required_item_except_own_photos():
     checks = {c.name: c for c in sc.score(sc.BENCHMARK)}
     missing = [name for name, c in checks.items() if not c.ok]
@@ -8,6 +11,7 @@ def test_benchmark_resort_meets_every_required_item_except_own_photos():
     assert checks['官方视频'].detail == '1 条'
 
 
+@pytest.mark.local_data('resorts/beidahu.yaml', 'resorts/duolemeidi.yaml')
 def test_scorecard_flags_gaps_for_thin_resort():
     checks = {c.name: c for c in sc.score('duolemeidi')}
     assert not checks['官方视频'].ok

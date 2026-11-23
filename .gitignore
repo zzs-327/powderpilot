@@ -66,3 +66,6 @@ private/acl-recovery/
 
 # 参考图与裁剪副本（第三方图片，不随仓库分发）
 .terrain-reference/
+
+# 由 scripts.export_graph 生成的后端图谱
+/ski-backend/data/graph/

@@ -348,8 +348,11 @@ def test_coverage_consistency():
 
     covered = set(ResortRegistry.list_resort_ids())
     covered_names = set(ResortRegistry.name_map())   # 只算**已收录**的名字（别把未收录名单也算进来）
-    listed = _yaml.safe_load((_Path(_settings.RESORT_DIR) / '..'
-                              / 'uncovered_resorts.yaml').resolve().read_text(encoding='utf-8'))
+    path = (_Path(_settings.RESORT_DIR).parent / 'uncovered_resorts.yaml').resolve()
+    if not path.is_file():
+        print('  跳过未收录名单一致性检查：未提供 uncovered_resorts.yaml')
+        return
+    listed = _yaml.safe_load(path.read_text(encoding='utf-8'))
     missing = [item['name'] for item in (listed or {}).get('resorts') or []
                if item['name'] in covered_names]
     check('未收录名单里没有"其实已收录"的雪场', not missing, str(missing))

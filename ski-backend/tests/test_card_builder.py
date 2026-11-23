@@ -7,9 +7,12 @@
 """
 import pytest
 
+
 from agent.card_builder import (build_card, build_itinerary, build_sources,
                                pick_budget, pick_gear, select_budget)
 from agent.card_check import check_card
+
+pytestmark = pytest.mark.usefixtures("test_registry")
 
 # 真实形状的价格行（ResortService.get_prices 的返回）
 PRICES = [
@@ -298,6 +301,7 @@ def test_reference_prices_are_listed_but_not_summed():
     assert check_card(named, evidence_text='', allowed_ids=set(), check_budget=False) == []
 
 
+@pytest.mark.local_data('resorts/wanlong.yaml')
 def test_legacy_wanlong_card_budget_unchanged():
     card = build_card(resort_name='万龙滑雪场', trip=TRIP, evidences=EVIDENCES, prices=PRICES)
     assert [(item.amount, item.counted) for item in card.budget.items] == [(650, True), (200, True)]
@@ -308,6 +312,7 @@ def test_legacy_wanlong_card_budget_unchanged():
     assert any('买错票种' in tip.text and tip.source for tip in card.tips)
 
 
+@pytest.mark.local_data('resorts/rusutsu.yaml')
 def test_curated_tips_follow_the_named_resort_not_the_price_rows():
     card = build_card(resort_name='留寿都滑雪场', trip=RUSUTSU_TRIP, evidences=[], prices=[])
     texts = [tip.text for tip in card.tips]

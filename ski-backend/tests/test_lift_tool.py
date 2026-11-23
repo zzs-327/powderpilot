@@ -1,8 +1,11 @@
+import pytest
+
 from agent.tools import get_resort_lifts, TOOLS
 from agent.middleware import EVIDENCE_BLOCK
 from rag.parser import ResortParser
 
 
+@pytest.mark.local_data('resorts/taiwu.yaml')
 def test_lifts_empty_is_local_archive_evidence_not_official():
     text = get_resort_lifts.func('太舞')
     assert '暂未收录' in text and '不代表现实没有缆车' in text
@@ -11,6 +14,7 @@ def test_lifts_empty_is_local_archive_evidence_not_official():
     assert '22 条' not in text and '16 公里' not in text
 
 
+@pytest.mark.local_data('resorts/duolemeidi.yaml')
 def test_populated_lifts_preserve_parsed_evidence():
     text = get_resort_lifts.func('duolemeidi')
     docs = [d for d in ResortParser.parse_resort('duolemeidi') if d.metadata['doc_type'] == 'lift']

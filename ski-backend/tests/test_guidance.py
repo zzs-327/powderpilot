@@ -2,12 +2,16 @@
 import asyncio
 
 import pytest
+
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langgraph.errors import GraphRecursionError
 
 from agent.middleware import DEGRADE_REPLY, RETRY_MARK
 from service.agent_service import AgentService
 from service.guidance_service import build_guidance
+
+
+pytestmark = pytest.mark.usefixtures("guidance_catalog")
 
 
 def test_context_reused_without_ai_text_matching():
@@ -260,6 +264,7 @@ def test_continue_preserves_preparation_but_new_question_switches_intent():
     assert build_guidance(state)['suggestions'][0]['id'] == 'cost-inclusions'
 
 
+@pytest.mark.local_data('resorts/beidahu.yaml', 'graph/graph.json')
 def test_beidahu_next_question_follows_the_topic():
     def ask(text):
         guidance = build_guidance({'messages': [HumanMessage(content=text)]})
@@ -299,6 +304,7 @@ def test_beidahu_next_question_follows_the_topic():
     assert all(item['id'] != 'choose-board' for item in guidance['suggestions'])
 
 
+@pytest.mark.local_data('resorts/beidahu.yaml', 'graph/graph.json')
 def test_run_brief_is_archive_not_model_prose():
     def brief(text):
         return build_guidance({'messages': [HumanMessage(content=text)]}).get('run_brief')
@@ -338,6 +344,7 @@ def test_present_reply_adds_the_missing_total_and_unwatched_limit():
     assert present_reply('星光大道适合新手。[E101]', '长度约 2279 米') == '星光大道适合新手。[E101]'
 
 
+@pytest.mark.local_data('resorts/beidahu.yaml', 'graph/graph.json')
 def test_refusal_does_not_precede_archive_runs():
     from service.run_brief import present_reply
     apology = ('很抱歉，目前没有找到关于北大湖滑雪场新手适合先滑哪条雪道的具体信息。'

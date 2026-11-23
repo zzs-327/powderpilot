@@ -63,6 +63,10 @@ jobs:
         working-directory: ski-backend
         run: python -m scripts.sync_to_mysql
 
+      - name: 生成当前档案图谱
+        working-directory: ski-backend
+        run: python -m scripts.export_graph --no-front
+
       - name: pytest（接口契约 / 收录范围守卫 / 行程卡校验 / 离线套件）
         working-directory: ski-backend
         run: python -m pytest -q

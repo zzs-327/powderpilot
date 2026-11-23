@@ -11,7 +11,7 @@
 >
 > **性价比不是低价优先**：结合出发地、日期、水平、预算和偏好，说明费用包含项、额外开销及体验取舍；不预设便宜雪场更合适，也不把名气或高价等同于值得。
 
-> 本仓库是 2026-11-23（Asia/Shanghai）从私有开发树导出的**公开源码快照**。导出时做了脱敏，并保守地去掉了版权未澄清的雪场全文档案。本页说明以本快照为准。导出后未完整安装依赖，也未重新跑评测或启动服务。
+> 本仓库是 2026-11-23（Asia/Shanghai）从私有开发树导出的**公开源码快照**。导出时做了脱敏，并保守地去掉了版权未澄清的雪场全文档案。本页说明以本快照为准。公开版维护测试使用固定测试数据；依赖本地真实档案的用例会显示所需文件和跳过原因。历史评测分数仍对应原记录。
 
 ## 近期产品重点（规划）
 
@@ -96,10 +96,11 @@ pip install -r requirements.txt
 cp .env.example .env          # 填入你自己的 API 密钥、数据库连接和 SECRET_KEY（不要使用仓库占位值）
 python init_db.py             # 建表。演示账号不会使用仓库内置口令，需自设环境变量后才会创建
 python -m scripts.sync_to_mysql   # 将 resorts/ 档案写入 MySQL（先放入你有权使用的档案或自带示例）
+python -m scripts.export_graph    # 为交互入口生成当前档案的图谱
 python -m rag.ingest          # 写入向量库（需先启动 Ollama 并 pull 嵌入模型）
 
 python -m scripts.check_env   # 环境自检
-python -m pytest              # 自动化测试（不依赖完整真实雪场档案的部分）
+python -m pytest -rs          # 自动化测试，显示本地数据缺失的跳过原因
 python -m scripts.chat_cli --debug
 python main.py                # http://127.0.0.1:8000/docs
 ```
@@ -119,7 +120,6 @@ python main.py                # http://127.0.0.1:8000/docs
 | [docs/DATABASE_MIGRATIONS.md](docs/DATABASE_MIGRATIONS.md) | Alembic 新库初始化、旧库结构核对与接管边界 |
 | [docs/SHORT_DELIVERY.md](docs/SHORT_DELIVERY.md) | 短交付与工程验证边界 |
 | [docs/MEDIA_COLLECTION.md](docs/MEDIA_COLLECTION.md) | 图片/教学视频来源授权与接入规则 |
-| [docs/collection/README.md](docs/collection/README.md) | 官方页面检查脚本的用法（本快照不含采集摘录全文） |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | 数据贡献门槛、门禁、提交规范 |
 | [GOVERNANCE.md](GOVERNANCE.md) | 决策流程、发布规则、数据治理 |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | 踩坑记录与设计决策 |

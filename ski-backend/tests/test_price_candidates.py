@@ -1,7 +1,11 @@
 """名称错序只补查同场候选价目，不宣称目标价已命中。"""
+import pytest
+
 from contextlib import nullcontext
 from agent import tools
 
+
+pytestmark = pytest.mark.usefixtures("test_registry")
 
 def test_mismatched_item_returns_same_resort_candidates(monkeypatch):
     calls = []
@@ -33,6 +37,7 @@ def test_missing_resort_never_borrows_other_prices(monkeypatch):
     assert "未查询到" in result and "[E" not in result
 
 
+@pytest.mark.local_data('resorts/rusutsu.yaml')
 def test_named_board_without_a_price_does_not_borrow_the_other_board(monkeypatch):
     rows = [
         dict(resort_name='留寿都滑雪场', item='标准单板套装·成人1日', price=10800, unit='套/日',

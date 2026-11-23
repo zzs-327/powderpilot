@@ -43,6 +43,7 @@ def test_existing_yaml_prices_are_valid_and_text_unchanged(resort_id):
             assert f'{row["price"]} {code}' in text and '元' not in text
 
 
+@pytest.mark.local_data('resorts/wanlong.yaml')
 def test_parser_price_chunks_keep_legacy_text():
     docs = [d for d in ResortParser.parse_resort('wanlong') if d.metadata['doc_type'] == 'price']
     data = _yaml('wanlong')

@@ -1,8 +1,14 @@
+import pytest
+
+
 from types import SimpleNamespace
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from agent.conversation_context import known_location
 from agent.conversation_focus import ConversationFocusMiddleware
 from service.guidance_service import build_guidance
+
+
+pytestmark = pytest.mark.usefixtures("guidance_catalog")
 
 
 def test_location_survives_followup_and_new_user_location_wins():

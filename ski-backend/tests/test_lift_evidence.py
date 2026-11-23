@@ -1,7 +1,10 @@
 """索道服务级别只能来自档案证据，未知关系不得按布局补边。"""
+import pytest
+
 from scripts.export_graph import build_graph
 
 
+@pytest.mark.local_data('resorts/duolemeidi.yaml')
 def test_duolemeidi_levels_preserve_transcribed_evidence():
     graph = build_graph()
     expected = {
@@ -21,6 +24,7 @@ def test_duolemeidi_levels_preserve_transcribed_evidence():
         assert all(edge['evidence']['data_status'] == 'transcribed' for edge in edges)
 
 
+@pytest.mark.local_data('resorts/beidahu.yaml', 'resorts/yunding.yaml', 'resorts/taiwu.yaml')
 def test_unknown_lift_services_stay_unknown():
     graph = build_graph()
     for resort_id in ('beidahu', 'yunding'):

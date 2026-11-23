@@ -1,4 +1,6 @@
 """提示词契约守卫，不声称静态测试能证明真实模型服从。"""
+import pytest
+
 from agent.prompts import PromptBuilder
 
 
@@ -29,6 +31,7 @@ def test_unset_profile_does_not_invent_conditions():
     assert '不同币种不能换算后相加' in prompt
 
 
+@pytest.mark.local_data('resorts/beidahu.yaml')
 def test_recording_conditions_does_not_start_trip_collection():
     prompt = PromptBuilder.build()
     assert '记录已有条件不等于用户请求规划' in prompt

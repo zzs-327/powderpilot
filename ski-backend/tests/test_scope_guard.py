@@ -6,9 +6,13 @@
 好消息是这条守卫在检索入口的第一行就短路了（rag/retriever.py），
 所以这些用例**不需要 Ollama**，换机器也能跑。
 """
+import pytest
+
 from rag.parser import ResortRegistry
 from rag.retriever import retrieve
 
+
+pytestmark = pytest.mark.usefixtures("test_registry")
 
 def test_uncovered_resort_is_detected():
     assert ResortRegistry.detect_unknown('二世谷雪票多少钱')

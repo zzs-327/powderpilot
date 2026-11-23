@@ -1,3 +1,5 @@
+import pytest
+
 from pathlib import Path
 import yaml
 from service import media_service
@@ -22,6 +24,7 @@ def test_media_empty_without_curated_items():
     assert media_service.media_for_resorts(['unknown']) == []
 
 
+@pytest.mark.local_data('resorts/taiwu.yaml', 'resorts/songhuahu.yaml', 'graph/graph.json')
 def test_real_media_catalog_attaches_to_resort_guidance():
     from langchain_core.messages import HumanMessage
     from service.guidance_service import build_guidance

@@ -44,6 +44,7 @@ def test_login_with_wrong_password_is_business_error(client, requires_db):
     assert body['msg']
 
 
+@pytest.mark.local_data('resorts/wanlong.yaml')
 def test_resort_list_carries_provenance(client, requires_db):
     """雪场列表必须带可信度档位——这是本项目对外最该露的信息。"""
     resp = client.get('/api/v1/resort')
@@ -57,6 +58,7 @@ def test_resort_list_carries_provenance(client, requires_db):
     assert all(item.get('data_status') for item in resorts)
 
 
+@pytest.mark.local_data('resorts/rusutsu.yaml')
 def test_resort_tips_quote_known_gaps(client, requires_db):
     resp = client.get('/api/v1/resort/rusutsu/tips')
     body = resp.json()
@@ -66,6 +68,7 @@ def test_resort_tips_quote_known_gaps(client, requires_db):
     assert all(item.get('source') for item in body['data'])
 
 
+@pytest.mark.local_data('resorts/wanlong.yaml')
 def test_resort_runs_stats(client, requires_db):
     resp = client.get('/api/v1/resort/wanlong/runs')
     body = resp.json()

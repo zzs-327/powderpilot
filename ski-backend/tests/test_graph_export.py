@@ -17,6 +17,7 @@ import yaml
 
 from config.config import settings
 from scripts.export_graph import build_graph
+from rag.parser import list_resort_ids
 
 EVIDENCE_FIELDS = {'source', 'source_type', 'date', 'expire_at', 'data_status'}
 EDGE_TYPES = {'has_run', 'has_lift', 'suitable_for', 'serves'}
@@ -69,6 +70,7 @@ def test_level_nodes_are_global(graph):
     assert all(node['resort_id'] == '' for node in levels), 'level 是跨雪场共用的全局节点'
 
 
+@pytest.mark.local_data('resorts/wanlong.yaml')
 def test_single_resort_view_covers_every_run_in_the_yaml(graph):
     """单雪场视图必须覆盖档案里的每一条雪道：导出漏数据是最难发现的那种 bug。"""
     data = yaml.safe_load((Path(settings.RESORT_DIR) / 'wanlong.yaml').read_text(encoding='utf-8'))
@@ -78,6 +80,7 @@ def test_single_resort_view_covers_every_run_in_the_yaml(graph):
         assert run['name'] in labels, f'档案里有雪道「{run["name"]}」，图里没有'
 
 
+@pytest.mark.local_data('resorts/wanlong.yaml')
 def test_single_resort_view_edges_and_levels(graph):
     view = _wanlong(graph)
     types = {edge['type'] for edge in view['edges']}
@@ -98,4 +101,4 @@ def test_stats_match_the_lists(graph):
     stats = graph['stats']
     assert stats['node_count'] == len(graph['nodes'])
     assert stats['edge_count'] == len(graph['edges'])
-    assert stats['resort_count'] == len(stats['resorts']) == 13
+    assert stats['resort_count'] == len(stats['resorts']) == len(list_resort_ids())

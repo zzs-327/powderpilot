@@ -7,10 +7,14 @@
 这里复用的是它们新暴露的 run_suite()：返回 (通过数, 失败数)，不 sys.exit——
 否则 pytest 会把"有断言失败"报成 SystemExit，而不是一条能定位的失败用例。
 """
+import pytest
+
 import asyncio
 
 from scripts import test_chat_stream, test_middleware, test_provenance
 
+
+pytestmark = pytest.mark.usefixtures("test_registry")
 
 def test_provenance_suite():
     """数据可信度分级：档位表两处逐字一致 / 印证记录解析 / 话术分档。"""
@@ -19,6 +23,7 @@ def test_provenance_suite():
     assert passed > 0
 
 
+@pytest.mark.local_data('resorts/wanlong.yaml', 'resorts/beidahu.yaml', 'uncovered_resorts.yaml')
 def test_middleware_suite(requires_db):
     """引用校验中间件：编造数字、引用不存在的编号、跨轮回看、裁剪兜底。
 

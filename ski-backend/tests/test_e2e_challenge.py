@@ -160,6 +160,7 @@ def test_cases_cli_does_not_overwrite_baseline(evaluator, monkeypatch, tmp_path)
     assert baseline.read_text(encoding='utf-8') == 'original'
 
 
+@pytest.mark.local_data('resorts/wanlong.yaml', 'resorts/jiangjunshan.yaml')
 def test_challenge_expectations_match_curated_data():
     data = BACKEND / 'data'
     wanlong = yaml.safe_load((data / 'resorts/wanlong.yaml').read_text(encoding='utf-8'))
